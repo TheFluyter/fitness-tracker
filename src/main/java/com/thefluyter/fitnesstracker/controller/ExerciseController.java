@@ -28,7 +28,7 @@ public class ExerciseController {
         return "exercises";
     }
 
-    @PostMapping("/exercises/add")
+    @PostMapping("/exercises")
     public String addExercise(@ModelAttribute Exercise exercise) {
         exerciseService.save(exercise);
         return "redirect:/fitness/exercises";

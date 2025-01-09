@@ -26,6 +26,7 @@ public class ExerciseService {
     }
 
     public void save(Exercise exercise) {
-        exerciseRepository.save(exercise);
+        Exercise saved = exerciseRepository.save(exercise);
+        log.info("Saved exercise {}", saved);
     }
 }
