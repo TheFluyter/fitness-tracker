@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exercises</title>
+    <link rel="stylesheet"
+          href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+<div class="container mt-5">
+    <h1 class="mb-4 text-center font-head">Exercises</h1>
+    <table class="table table-striped table-hover table-sm table-bordered">
+        <thead class="table-header">
+        <tr>
+            <th>Name</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="exercise : ${exercises}">
+            <td th:text="${exercise.name}"></td>
+        </tr>
+        </tbody>
+    </table>
+    <div class="mb-4 text-right">
+        <a href="/fitness/exercises/add" class="btn btn-primary">Add Exercise</a>
+    </div>
+</div>
+</body>
+</html>

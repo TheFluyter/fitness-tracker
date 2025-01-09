@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Exercise</title>
+    <link rel="stylesheet"
+          href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+<div class="container mt-5">
+    <h1 class="mb-4 text-center font-head">Add Exercise</h1>
+    <form action="/fitness/exercises/add" method="post" class="form-group">
+        <div class="mb-3">
+            <label for="name" class="form-label">Exercise Name</label>
+            <input type="text" id="name" name="name" class="form-control" required>
+        </div>
+        <button type="submit" class="btn btn-success">Add Exercise</button>
+        <a href="/fitness/exercises" class="btn btn-secondary">Cancel</a>
+    </form>
+</div>
+</body>
+</html>

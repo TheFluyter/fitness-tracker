@@ -1,12 +1,17 @@
 package com.thefluyter.fitnesstracker.controller;
 
+import com.thefluyter.fitnesstracker.model.Exercise;
 import com.thefluyter.fitnesstracker.serivce.ExerciseService;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.List;
 
-@RestController()
+@Controller()
 @RequestMapping("fitness")
 public class ExerciseController {
 
@@ -16,22 +21,23 @@ public class ExerciseController {
         this.exerciseService = exerciseService;
     }
 
-    @GetMapping("exercise")
-    public ResponseEntity<List<String>> getAllExercises() {
-        List<String> exerciseNames = exerciseService.getAllExercises();
-        return ResponseEntity.ok(exerciseNames);
+    @GetMapping("/exercises")
+    public String getAllExercises(Model model) {
+        List<Exercise> exercises = exerciseService.getAllExercises();
+        model.addAttribute("exercises", exercises);
+        return "exercises";
     }
 
-    @GetMapping("exercise/{name}")
-    public ResponseEntity<Long> getExerciseId(@PathVariable(value = "name") String name) {
-        Long id = exerciseService.getExerciseId(name);
-        return ResponseEntity.ok(id);
+    @GetMapping("/exercises/add")
+    public String showAddExerciseForm(Model model) {
+        model.addAttribute("exercise", new Exercise());
+        return "add-exercise";
     }
 
-    @PostMapping("exercise")
-    public ResponseEntity<Long> createExercise(@RequestBody String name) {
-        Long id = exerciseService.createExercise(name);
-        return ResponseEntity.ok(id);
+    @PostMapping("/exercises/add")
+    public String addExercise(@ModelAttribute Exercise exercise) {
+        exerciseService.save(exercise);
+        return "redirect:/fitness/exercises";
     }
 
 }

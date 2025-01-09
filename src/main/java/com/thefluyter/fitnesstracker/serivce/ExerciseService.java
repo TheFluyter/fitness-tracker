@@ -5,6 +5,7 @@ import com.thefluyter.fitnesstracker.repository.ExerciseRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
+import java.util.Comparator;
 import java.util.List;
 
 import static java.util.Locale.ROOT;
@@ -19,17 +20,15 @@ public class ExerciseService {
         this.exerciseRepository = exerciseRepository;
     }
 
-    public List<String> getAllExercises() {
+    public List<Exercise> getAllExercises() {
         List<Exercise> exercises = exerciseRepository.findAll();
-        log.info("Found {} exercises", exercises.size());
         return exercises.stream()
-            .map(Exercise::getName)
+            .sorted(Comparator.comparing(Exercise::getName))
             .toList();
     }
 
-    public Long getExerciseId(String name) {
-        Exercise exercise = exerciseRepository.findByNameContaining(name);
-        return exercise == null ? null : exercise.getId();
+    public void save(Exercise exercise) {
+        exerciseRepository.save(exercise);
     }
 
     public Long createExercise(String name) {
