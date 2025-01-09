@@ -14,8 +14,8 @@ import java.util.Objects;
 @Setter
 public class RoutineExerciseKey implements Serializable {
 
-    private String routineId;
-    private String exerciseId;
+    private Long routineId;
+    private Long exerciseId;
 
     @Override
     public boolean equals(Object object) {
