@@ -8,8 +8,6 @@ import org.springframework.stereotype.Component;
 import java.util.Comparator;
 import java.util.List;
 
-import static java.util.Locale.ROOT;
-
 @Component
 @Slf4j
 public class ExerciseService {
@@ -29,12 +27,5 @@ public class ExerciseService {
 
     public void save(Exercise exercise) {
         exerciseRepository.save(exercise);
-    }
-
-    public Long createExercise(String name) {
-        Exercise exercise = new Exercise(name.toLowerCase(ROOT));
-        Exercise saved = exerciseRepository.save(exercise);
-        log.info("Created exercise '{}' with id {}", saved.getName(), saved.getId());
-        return saved.getId();
     }
 }
