@@ -28,12 +28,6 @@ public class ExerciseController {
         return "exercises";
     }
 
-    @GetMapping("/exercises/add")
-    public String showAddExerciseForm(Model model) {
-        model.addAttribute("exercise", new Exercise());
-        return "add-exercise";
-    }
-
     @PostMapping("/exercises/add")
     public String addExercise(@ModelAttribute Exercise exercise) {
         exerciseService.save(exercise);
