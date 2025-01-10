@@ -18,7 +18,7 @@ public class ExerciseLog {
     private Integer id;
 
     @ManyToOne
-    @JoinColumn(name = "exercise_id", referencedColumnName = "id")
+    @JoinColumn(name = "exercise_id", referencedColumnName = "id", nullable = false)
     private Exercise exercise;
 
     @Column(name = "reps1")

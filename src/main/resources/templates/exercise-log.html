@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exercise Logs</title>
+    <link rel="stylesheet"
+          href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.4.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</head>
+<body>
+<div class="container mt-5">
+    <h1 class="mb-4 text-center font-head">Exercise Logs</h1>
+    <table class="table table-striped table-hover table-sm table-bordered">
+        <thead class="table-header">
+        <tr>
+            <th>Date</th>
+            <th>Exercise Name</th>
+            <th>Reps (1, 2, 3)</th>
+            <th>Weights (1, 2, 3)</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="log : ${exerciseLogs}">
+            <td th:text="${log.date}"></td>
+            <td th:text="${log.exercise.name}"></td>
+            <td>
+                <span th:text="${log.reps1}"></span>,
+                <span th:text="${log.reps2}"></span>,
+                <span th:text="${log.reps3}"></span>
+            </td>
+            <td>
+                <span th:text="${log.weight1}"></span>,
+                <span th:text="${log.weight2}"></span>,
+                <span th:text="${log.weight3}"></span>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <div class="mb-4 text-right">
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addExerciseLogModal">
+            Add Log
+        </button>
+    </div>
+</div>
+
+<div class="modal fade" id="addExerciseLogModal" tabindex="-1" aria-labelledby="addExerciseLogModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="addExerciseLogModalLabel">Add Exercise Log</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form id="addExerciseLogForm" method="post" action="/fitness/exercise-log">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="exercise">Exercise</label>
+                        <select class="form-control" id="exercise" name="exerciseId" required>
+                            <option th:each="exercise : ${exercises}" th:value="${exercise.id}" th:text="${exercise.name}"></option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="date">Date</label>
+                        <input type="date" class="form-control" id="date" name="date" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="reps1">Reps (Set 1, 2, 3)</label>
+                        <div class="d-flex">
+                            <input type="number" class="form-control mr-2" id="reps1" name="reps1" placeholder="Set 1" required>
+                            <input type="number" class="form-control mr-2" id="reps2" name="reps2" placeholder="Set 2" required>
+                            <input type="number" class="form-control" id="reps3" name="reps3" placeholder="Set 3" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="weight1">Weights (Set 1, 2, 3)</label>
+                        <div class="d-flex">
+                            <input type="number" step="0.01" class="form-control mr-2" id="weight1" name="weight1" placeholder="Set 1 (kg)" required>
+                            <input type="number" step="0.01" class="form-control mr-2" id="weight2" name="weight2" placeholder="Set 2 (kg)" required>
+                            <input type="number" step="0.01" class="form-control" id="weight3" name="weight3" placeholder="Set 3 (kg)" required>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-success">Add Log</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+</html>
