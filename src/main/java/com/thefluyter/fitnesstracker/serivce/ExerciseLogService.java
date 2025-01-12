@@ -19,6 +19,10 @@ public class ExerciseLogService {
         return exerciseLogRepository.findAll();
     }
 
+    public List<ExerciseLog> findByExerciseId(Long exerciseId) {
+        return exerciseLogRepository.findByExercise_Id(exerciseId);
+    }
+
     public void save(ExerciseLog exerciseLog) {
         ExerciseLog saved = exerciseLogRepository.save(exerciseLog);
         log.info("Saved exercise {}", saved);
