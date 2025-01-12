@@ -24,15 +24,20 @@ public class ExerciseLogController {
     @GetMapping("exercise-log")
     public String getExerciseLogs(@RequestParam(value = "exerciseId", required = false) Long exerciseId, Model model) {
         List<ExerciseLog> exerciseLogs;
+        String selectedExerciseName = null;
+
         if (exerciseId != null) {
             log.info("Retrieving exercise logs for exercise id {}", exerciseId);
             exerciseLogs = exerciseLogService.findByExerciseId(exerciseId);
+            selectedExerciseName = exerciseService.findById(exerciseId).getName();
         } else {
             exerciseLogs = exerciseLogService.findAll();
         }
         List<Exercise> exercises = exerciseService.getAllExercises();
         model.addAttribute("exerciseLogs", exerciseLogs);
         model.addAttribute("exercises", exercises);
+        model.addAttribute("selectedExerciseName", selectedExerciseName);
+        model.addAttribute("selectedExerciseId", exerciseId);
         return "exercise-log";
     }
 

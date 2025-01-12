@@ -17,20 +17,27 @@
     <h1 class="mb-4 text-center font-head">Exercise Logs</h1>
 
     <!--Filter section-->
-    <form method="get" action="/fitness/exercise-log">
-        <div class="form-group row">
-            <label for="filterExercise" class="col-sm-2 col-form-label">Filter by Exercise</label>
-            <div class="col-sm-6">
-                <select id="filterExercise" name="exerciseId" class="form-control">
-                    <option value="">All Exercises</option>
-                    <option th:each="exercise : ${exercises}" th:value="${exercise.id}" th:text="${exercise.name}"></option>
-                </select>
-            </div>
-            <div class="col-sm-4">
-                <button type="submit" class="btn btn-primary">Filter</button>
-            </div>
+    <form method="get" action="/fitness/exercise-log" class="mb-4">
+        <label for="filterExercise" class="form-label">Filter by Exercise:</label>
+        <div class="d-flex">
+            <select id="filterExercise" name="exerciseId" class="form-control mr-2">
+                <option value="">All Exercises</option>
+                <option th:each="exercise : ${exercises}"
+                        th:value="${exercise.id}"
+                        th:text="${exercise.name}"
+                        th:selected="${exercise.id == selectedExerciseId}"></option>
+            </select>
+            <button type="submit" class="btn btn-primary">Apply Filter</button>
         </div>
     </form>
+
+    <!--Selected filter-->
+    <div th:if="${selectedExerciseName}" class="mb-4">
+        <button class="btn btn-secondary">
+            Filter: <span th:text="${selectedExerciseName}"></span>
+            <a href="/fitness/exercise-log" class="text-danger ml-2" style="text-decoration: none;">&times;</a>
+        </button>
+    </div>
 
     <!--Table-->
     <table class="table table-striped table-hover table-sm table-bordered">
