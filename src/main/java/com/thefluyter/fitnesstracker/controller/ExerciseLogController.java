@@ -33,6 +33,7 @@ public class ExerciseLogController {
         } else {
             exerciseLogs = exerciseLogService.findAll();
         }
+
         List<Exercise> exercises = exerciseService.getAllExercises();
         model.addAttribute("exerciseLogs", exerciseLogs);
         model.addAttribute("exercises", exercises);
