@@ -31,7 +31,7 @@
         </div>
     </form>
 
-    <!--selected filter-->
+    <!--show selected filter-->
     <div th:if="${selectedExerciseName}" class="mb-4">
         <button type="button" class="btn btn-secondary">
             Filter: <span th:text="${selectedExerciseName}"></span>
@@ -67,7 +67,7 @@
         </tbody>
     </table>
 
-    <!--add log button-->
+    <!--trigger modal button-->
     <div class="mb-4 text-right">
         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addExerciseLogModal">
             Add Log
@@ -76,82 +76,6 @@
 </div>
 
 <!--modal-->
-<div class="modal fade" id="addExerciseLogModal" tabindex="-1">
-    <div class="modal-dialog">
-        <div class="modal-content">
-
-            <div class="modal-header">
-                <h5 class="modal-title" id="addExerciseLogModalLabel">Add Exercise Log</h5>
-                <button type="button" class="close" data-dismiss="modal">
-                    <span>&times;</span>
-                </button>
-            </div>
-
-            <form id="addExerciseLogForm" method="post" action="/fitness/exercise-log">
-                <div class="modal-body">
-                    <div class="form-group">
-                        <label for="exercise">Exercise</label>
-                        <select class="form-control" id="exercise" name="exerciseId" required>
-                            <option th:each="exercise : ${exercises}" th:value="${exercise.id}" th:text="${exercise.name}"></option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="date">Date</label>
-                        <input type="date" class="form-control" id="date" name="date" required>
-                    </div>
-                    <div class="form-group">
-                        <div class="d-flex">
-                            <div class="mr-2">
-                                <label for="reps1">Reps set 1</label>
-                                <select class="form-control" id="reps1" name="reps1" required>
-                                    <option th:each="n : ${#numbers.sequence(1, 40)}" th:value="${n}" th:text="${n}"></option>
-                                </select>
-                            </div>
-                            <div class="mr-2">
-                                <label for="reps2">Reps set 2</label>
-                                <select class="form-control" id="reps2" name="reps2" required>
-                                    <option th:each="n : ${#numbers.sequence(1, 40)}" th:value="${n}" th:text="${n}"></option>
-                                </select>
-                            </div>
-                            <div>
-                                <label for="reps3">Reps set 3</label>
-                                <select class="form-control" id="reps3" name="reps3" required>
-                                    <option th:each="n : ${#numbers.sequence(1, 40)}" th:value="${n}" th:text="${n}"></option>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="d-flex">
-                            <div class="mr-2">
-                                <label for="weight1">Weight set 1</label>
-                                <select class="form-control" id="weight1" name="weight1" required>
-                                    <option th:each="n : ${#numbers.sequence(1, 300)}" th:value="${n}" th:text="${n}"></option>
-                                </select>
-                            </div>
-                            <div class="mr-2">
-                                <label for="weight2">Weight set 2</label>
-                                <select class="form-control" id="weight2" name="weight2" required>
-                                    <option th:each="n : ${#numbers.sequence(1, 300)}" th:value="${n}" th:text="${n}"></option>
-                                </select>
-                            </div>
-                            <div>
-                                <label for="weight3">Weight set 3</label>
-                                <select class="form-control" id="weight3" name="weight3" required>
-                                    <option th:each="n : ${#numbers.sequence(1, 300)}" th:value="${n}" th:text="${n}"></option>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                    <button type="submit" class="btn btn-success">Add Log</button>
-                </div>
-            </form>
-        </div>
-    </div>
-</div>
+<div th:insert="~{fragments/exercise-log-modal :: exercise-log-modal}"></div>
 </body>
 </html>

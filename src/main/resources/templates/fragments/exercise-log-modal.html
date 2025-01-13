@@ -1,0 +1,109 @@
+<div th:fragment="exercise-log-modal">
+    <div class="modal fade" id="addExerciseLogModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <h5 class="modal-title" id="addExerciseLogModalLabel">Add Exercise Log</h5>
+                    <button type="button" class="close" data-dismiss="modal">
+                        <span>&times;</span>
+                    </button>
+                </div>
+
+                <form id="addExerciseLogForm" method="post" action="/fitness/exercise-log">
+                    <div class="modal-body">
+
+                        <!-- Exercise Dropdown -->
+                        <div class="form-group">
+                            <label for="exercise">Exercise</label>
+                            <select class="form-control" id="exercise" name="exerciseId" required>
+                                <option th:each="exercise : ${exercises}" th:value="${exercise.id}" th:text="${exercise.name}"></option>
+                            </select>
+                        </div>
+
+                        <!-- Date Input -->
+                        <div class="form-group">
+                            <label for="date">Date</label>
+                            <input type="date" class="form-control" id="date" name="date" required>
+                        </div>
+
+                        <!-- Set Headers (Set 1, Set 2, Set 3) -->
+                        <div class="form-group">
+                            <div class="row mb-2">
+                                <div class="col">
+                                    <label>Set 1</label>
+                                </div>
+                                <div class="col">
+                                    <label>Set 2</label>
+                                </div>
+                                <div class="col">
+                                    <label>Set 3</label>
+                                </div>
+                            </div>
+
+                            <!-- Row for Reps (Set 1, Set 2, Set 3) -->
+                            <div class="row">
+                                <!-- Reps for Set 1 -->
+                                <div class="col">
+                                    <label for="reps1">Reps</label>
+                                    <select class="form-control" id="reps1" name="reps1" required>
+                                        <option th:each="n : ${#numbers.sequence(1, 40)}" th:value="${n}" th:text="${n}"></option>
+                                    </select>
+                                </div>
+
+                                <!-- Reps for Set 2 -->
+                                <div class="col">
+                                    <label for="reps2">Reps</label>
+                                    <select class="form-control" id="reps2" name="reps2" required>
+                                        <option th:each="n : ${#numbers.sequence(1, 40)}" th:value="${n}" th:text="${n}"></option>
+                                    </select>
+                                </div>
+
+                                <!-- Reps for Set 3 -->
+                                <div class="col">
+                                    <label for="reps3">Reps</label>
+                                    <select class="form-control" id="reps3" name="reps3" required>
+                                        <option th:each="n : ${#numbers.sequence(1, 40)}" th:value="${n}" th:text="${n}"></option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <!-- Row for Weights (Set 1, Set 2, Set 3) -->
+                            <div class="row">
+                                <!-- Weight for Set 1 -->
+                                <div class="col">
+                                    <label for="weight1">Weight</label>
+                                    <select class="form-control" id="weight1" name="weight1" required>
+                                        <option th:each="n : ${#numbers.sequence(1, 300)}" th:value="${n}" th:text="${n}"></option>
+                                    </select>
+                                </div>
+
+                                <!-- Weight for Set 2 -->
+                                <div class="col">
+                                    <label for="weight2">Weight</label>
+                                    <select class="form-control" id="weight2" name="weight2" required>
+                                        <option th:each="n : ${#numbers.sequence(1, 300)}" th:value="${n}" th:text="${n}"></option>
+                                    </select>
+                                </div>
+
+                                <!-- Weight for Set 3 -->
+                                <div class="col">
+                                    <label for="weight3">Weight</label>
+                                    <select class="form-control" id="weight3" name="weight3" required>
+                                        <option th:each="n : ${#numbers.sequence(1, 300)}" th:value="${n}" th:text="${n}"></option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                        <button type="submit" class="btn btn-success">Add Log</button>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>
