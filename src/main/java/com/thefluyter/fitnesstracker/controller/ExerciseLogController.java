@@ -27,7 +27,6 @@ public class ExerciseLogController {
         String selectedExerciseName = null;
 
         if (exerciseId != null) {
-            log.info("Retrieving exercise logs for exercise id {}", exerciseId);
             exerciseLogs = exerciseLogService.findByExerciseId(exerciseId);
             selectedExerciseName = exerciseService.findById(exerciseId).getName();
         } else {
