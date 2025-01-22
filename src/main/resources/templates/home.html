@@ -11,8 +11,27 @@
 <div class="container text-center mt-5">
     <h1>Fitness Tracker</h1>
     <p>Log and track all your fitness activities!</p>
-    <a href="/fitness/exercise-log" class="btn btn-primary">Exercise Log</a>
 </div>
+
+<!-- Jumbotrons Section -->
+<div class="container mt-4">
+    <!-- Jumbotron 1 -->
+    <div class="jumbotron">
+        <h2 class="display-5">Page A</h2>
+        <p class="lead">Discover detailed statistics and reports for your fitness journey.</p>
+        <a class="btn btn-success" href="/fitness/exercise-log" role="button">Go to Page A</a>
+    </div>
+
+    <!-- Jumbotron 2 -->
+    <div class="jumbotron">
+        <h2 class="display-5">Page B</h2>
+        <p class="lead">View all fitness exercises.</p>
+        <a class="btn btn-info" href="/fitness/exercises" role="button">Go to Page B</a>
+    </div>
+</div>
+
+<!-- Footer Fragment -->
 <div th:insert="~{fragments/footer :: footer}"></div>
+
 </body>
 </html>
