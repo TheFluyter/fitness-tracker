@@ -1,6 +1,6 @@
 package com.thefluyter.fitnesstracker.config;
 
-import com.thefluyter.fitnesstracker.serivce.FitnessUserDetailsService;
+import com.thefluyter.fitnesstracker.service.fitnessuserdetails.FitnessUserDetailsService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -42,9 +42,9 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.authenticationProvider(authenticationProvider());
         http.authorizeHttpRequests(auth ->
-                auth.requestMatchers("/users").authenticated()
-                    .anyRequest().permitAll()
+                auth.anyRequest().permitAll()
             )
+            .csrf().disable()
             .formLogin(login ->
                 login
                     .loginPage("/login")
