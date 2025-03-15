@@ -1,6 +1,5 @@
 package com.thefluyter.fitnesstracker.controller.exercise;
 
-import com.thefluyter.fitnesstracker.model.exercise.Exercise;
 import com.thefluyter.fitnesstracker.model.exercise.ExerciseData;
 import com.thefluyter.fitnesstracker.service.exercise.ExerciseService;
 import lombok.RequiredArgsConstructor;
@@ -28,9 +27,8 @@ public class ExerciseController {
     }
 
     @PostMapping("/exercises")
-    public String addExercise(@ModelAttribute Exercise exercise) {
-        exerciseService.save(exercise);
+    public String addExercise(@ModelAttribute ExerciseData exerciseData) {
+        exerciseService.addNewExercise(exerciseData);
         return "redirect:/fitness/exercises";
     }
-
 }

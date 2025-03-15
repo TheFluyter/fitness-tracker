@@ -55,7 +55,7 @@
         <tbody>
         <tr th:each="log : ${exerciseLogs}">
             <td th:text="${log.date}"></td>
-            <td th:text="${log.exercise.name}"></td>
+            <td th:text="${log.exerciseData.name}"></td>
             <td>
                 <span th:text="${log.reps1}"></span>,
                 <span th:text="${log.reps2}"></span>,

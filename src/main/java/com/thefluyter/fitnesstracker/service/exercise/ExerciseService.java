@@ -25,9 +25,9 @@ public class ExerciseService {
             .toList();
     }
 
-    public void save(Exercise exercise) {
-        Exercise saved = exerciseRepository.save(exercise);
-        log.info("Saved exercise {}", saved);
+    public void addNewExercise(ExerciseData exerciseData) {
+        Exercise saved = exerciseRepository.save(ExerciseMapper.INSTANCE.exerciseDataToExercise(exerciseData));
+        log.info("Saved exercise '{}'", saved);
     }
 
     public ExerciseData findById(long id) {

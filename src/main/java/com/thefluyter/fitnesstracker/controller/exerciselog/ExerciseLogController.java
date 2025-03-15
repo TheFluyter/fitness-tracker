@@ -1,7 +1,6 @@
 package com.thefluyter.fitnesstracker.controller.exerciselog;
 
 import com.thefluyter.fitnesstracker.model.exercise.ExerciseData;
-import com.thefluyter.fitnesstracker.model.exerciselog.ExerciseLog;
 import com.thefluyter.fitnesstracker.model.exerciselog.ExerciseLogData;
 import com.thefluyter.fitnesstracker.service.exerciselog.ExerciseLogService;
 import com.thefluyter.fitnesstracker.service.exercise.ExerciseService;
@@ -24,7 +23,7 @@ public class ExerciseLogController {
 
     @GetMapping("exercise-log")
     public String getExerciseLogs(@RequestParam(value = "exerciseId", required = false) Long exerciseId, Model model) {
-        List<ExerciseLog> exerciseLogs;
+        List<ExerciseLogData> exerciseLogs;
         String selectedExerciseName = null;
 
         if (exerciseId != null) {
@@ -45,7 +44,7 @@ public class ExerciseLogController {
     @PostMapping("exercise-log")
     public String addExerciseLog(@ModelAttribute ExerciseLogData exerciseLogData, @RequestParam("exerciseId") Long exerciseId) {
         ExerciseData exerciseData = exerciseService.findById(exerciseId);
-        exerciseLogService.save(exerciseLogData, exerciseData);
+        exerciseLogService.addExerciseToLog(exerciseLogData, exerciseData);
         return "redirect:/fitness/exercise-log";
     }
 }

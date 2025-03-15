@@ -19,16 +19,16 @@ public class ExerciseLogService {
 
     private final ExerciseLogRepository exerciseLogRepository;
 
-    public List<ExerciseLog> findAll() {
-        return exerciseLogRepository.findAll();
+    public List<ExerciseLogData> findAll() {
+        return ExerciseLogMapper.INSTANCE.exerciseLogsToExerciseLogDatas(exerciseLogRepository.findAll());
     }
 
-    public List<ExerciseLog> findByExerciseId(Long exerciseId) {
-        return exerciseLogRepository.findByExercise_Id(exerciseId);
+    public List<ExerciseLogData> findByExerciseId(Long exerciseId) {
+        return ExerciseLogMapper.INSTANCE.exerciseLogsToExerciseLogDatas(exerciseLogRepository.findByExercise_Id(exerciseId));
     }
 
     // TODO: is this the right place to add an exercise to an exercise log?
-    public void save(ExerciseLogData exerciseLogData, ExerciseData exerciseData) {
+    public void addExerciseToLog(ExerciseLogData exerciseLogData, ExerciseData exerciseData) {
         Exercise exercise = ExerciseMapper.INSTANCE.exerciseDataToExercise(exerciseData);
         ExerciseLog exerciseLog = ExerciseLogMapper.INSTANCE.exerciseLogDataToExerciseLog(exerciseLogData);
         exerciseLog.setExercise(exercise);
