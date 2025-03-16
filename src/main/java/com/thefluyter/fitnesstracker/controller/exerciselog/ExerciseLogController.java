@@ -1,7 +1,7 @@
 package com.thefluyter.fitnesstracker.controller.exerciselog;
 
-import com.thefluyter.fitnesstracker.model.exercise.ExerciseData;
-import com.thefluyter.fitnesstracker.model.exerciselog.ExerciseLogData;
+import com.thefluyter.fitnesstracker.model.exercise.ExerciseDto;
+import com.thefluyter.fitnesstracker.model.exerciselog.ExerciseLogDto;
 import com.thefluyter.fitnesstracker.service.exerciselog.ExerciseLogService;
 import com.thefluyter.fitnesstracker.service.exercise.ExerciseService;
 import lombok.RequiredArgsConstructor;
@@ -23,17 +23,17 @@ public class ExerciseLogController {
 
     @GetMapping("exercise-log")
     public String getExerciseLogs(@RequestParam(value = "exerciseId", required = false) Long exerciseId, Model model) {
-        List<ExerciseLogData> exerciseLogs;
+        List<ExerciseLogDto> exerciseLogs;
         String selectedExerciseName = null;
 
         if (exerciseId != null) {
-            exerciseLogs = exerciseLogService.findByExerciseId(exerciseId);
+            exerciseLogs = exerciseLogService.findByExerciseLogById(exerciseId);
             selectedExerciseName = exerciseService.findById(exerciseId).getName();
         } else {
             exerciseLogs = exerciseLogService.findAll();
         }
 
-        List<ExerciseData> exercises = exerciseService.getAllExercises();
+        List<ExerciseDto> exercises = exerciseService.getAllExercises();
         model.addAttribute("exerciseLogs", exerciseLogs);
         model.addAttribute("exercises", exercises);
         model.addAttribute("selectedExerciseName", selectedExerciseName);
@@ -42,9 +42,9 @@ public class ExerciseLogController {
     }
 
     @PostMapping("exercise-log")
-    public String addExerciseLog(@ModelAttribute ExerciseLogData exerciseLogData, @RequestParam("exerciseId") Long exerciseId) {
-        ExerciseData exerciseData = exerciseService.findById(exerciseId);
-        exerciseLogService.addExerciseToLog(exerciseLogData, exerciseData);
+    public String addExerciseLog(@ModelAttribute ExerciseLogDto exerciseLogDto, @RequestParam("exerciseId") Long exerciseId) {
+        ExerciseDto exerciseDto = exerciseService.findById(exerciseId);
+        exerciseLogService.addExerciseToLog(exerciseLogDto, exerciseDto);
         return "redirect:/fitness/exercise-log";
     }
 }

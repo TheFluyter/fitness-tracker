@@ -1,7 +1,7 @@
 package com.thefluyter.fitnesstracker.service.exerciselog;
 
 import com.thefluyter.fitnesstracker.model.exerciselog.ExerciseLog;
-import com.thefluyter.fitnesstracker.model.exerciselog.ExerciseLogData;
+import com.thefluyter.fitnesstracker.model.exerciselog.ExerciseLogDto;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 
@@ -12,10 +12,10 @@ public interface ExerciseLogMapper {
 
     ExerciseLogMapper INSTANCE = Mappers.getMapper(ExerciseLogMapper.class);
 
-    ExerciseLog exerciseLogDataToExerciseLog(ExerciseLogData exerciseLogData);
+    ExerciseLog exerciseLogDtoToExerciseLog(ExerciseLogDto exerciseLogDto);
 
-    List<ExerciseLogData> exerciseLogsToExerciseLogDatas(List<ExerciseLog> exerciseLogs);
+    List<ExerciseLogDto> exerciseLogsToExerciseLogDtos(List<ExerciseLog> exerciseLogs);
 
-    ExerciseLogData exerciseLogToExerciseLogData(ExerciseLog exerciseLog);
+    ExerciseLogDto exerciseLogToExerciseLogDto(ExerciseLog exerciseLog);
 
 }

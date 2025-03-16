@@ -1,6 +1,6 @@
 package com.thefluyter.fitnesstracker.model.exerciselog;
 
-import com.thefluyter.fitnesstracker.model.exercise.ExerciseData;
+import com.thefluyter.fitnesstracker.model.exercise.ExerciseDto;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -8,10 +8,10 @@ import java.time.LocalDate;
 
 @Getter
 @Setter
-public class ExerciseLogData {
+public class ExerciseLogDto {
 
     private Integer id;
-    private ExerciseData exerciseData;
+    private ExerciseDto exerciseDto;
     private Integer reps1;
     private Integer reps2;
     private Integer reps3;

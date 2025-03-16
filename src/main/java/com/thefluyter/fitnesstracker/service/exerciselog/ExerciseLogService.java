@@ -1,9 +1,9 @@
 package com.thefluyter.fitnesstracker.service.exerciselog;
 
 import com.thefluyter.fitnesstracker.model.exercise.Exercise;
-import com.thefluyter.fitnesstracker.model.exercise.ExerciseData;
+import com.thefluyter.fitnesstracker.model.exercise.ExerciseDto;
 import com.thefluyter.fitnesstracker.model.exerciselog.ExerciseLog;
-import com.thefluyter.fitnesstracker.model.exerciselog.ExerciseLogData;
+import com.thefluyter.fitnesstracker.model.exerciselog.ExerciseLogDto;
 import com.thefluyter.fitnesstracker.repository.exerciselog.ExerciseLogRepository;
 import com.thefluyter.fitnesstracker.service.exercise.ExerciseMapper;
 import lombok.RequiredArgsConstructor;
@@ -19,18 +19,18 @@ public class ExerciseLogService {
 
     private final ExerciseLogRepository exerciseLogRepository;
 
-    public List<ExerciseLogData> findAll() {
-        return ExerciseLogMapper.INSTANCE.exerciseLogsToExerciseLogDatas(exerciseLogRepository.findAll());
+    public List<ExerciseLogDto> findAll() {
+        return ExerciseLogMapper.INSTANCE.exerciseLogsToExerciseLogDtos(exerciseLogRepository.findAll());
     }
 
-    public List<ExerciseLogData> findByExerciseId(Long exerciseId) {
-        return ExerciseLogMapper.INSTANCE.exerciseLogsToExerciseLogDatas(exerciseLogRepository.findByExercise_Id(exerciseId));
+    public List<ExerciseLogDto> findByExerciseLogById(Long exerciseId) {
+        return ExerciseLogMapper.INSTANCE.exerciseLogsToExerciseLogDtos(exerciseLogRepository.findByExercise_Id(exerciseId));
     }
 
     // TODO: is this the right place to add an exercise to an exercise log?
-    public void addExerciseToLog(ExerciseLogData exerciseLogData, ExerciseData exerciseData) {
-        Exercise exercise = ExerciseMapper.INSTANCE.exerciseDataToExercise(exerciseData);
-        ExerciseLog exerciseLog = ExerciseLogMapper.INSTANCE.exerciseLogDataToExerciseLog(exerciseLogData);
+    public void addExerciseToLog(ExerciseLogDto exerciseLogDto, ExerciseDto exerciseDto) {
+        Exercise exercise = ExerciseMapper.INSTANCE.exerciseDtoToExercise(exerciseDto);
+        ExerciseLog exerciseLog = ExerciseLogMapper.INSTANCE.exerciseLogDtoToExerciseLog(exerciseLogDto);
         exerciseLog.setExercise(exercise);
 
         ExerciseLog saved = exerciseLogRepository.save(exerciseLog);

@@ -1,6 +1,6 @@
 package com.thefluyter.fitnesstracker.controller.exercise;
 
-import com.thefluyter.fitnesstracker.model.exercise.ExerciseData;
+import com.thefluyter.fitnesstracker.model.exercise.ExerciseDto;
 import com.thefluyter.fitnesstracker.service.exercise.ExerciseService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -21,14 +21,14 @@ public class ExerciseController {
 
     @GetMapping("/exercises")
     public String getAllExercises(Model model) {
-        List<ExerciseData> exercises = exerciseService.getAllExercises();
+        List<ExerciseDto> exercises = exerciseService.getAllExercises();
         model.addAttribute("exercises", exercises);
         return "exercises";
     }
 
     @PostMapping("/exercises")
-    public String addExercise(@ModelAttribute ExerciseData exerciseData) {
-        exerciseService.addNewExercise(exerciseData);
+    public String addExercise(@ModelAttribute ExerciseDto exerciseDto) {
+        exerciseService.addNewExercise(exerciseDto);
         return "redirect:/fitness/exercises";
     }
 }

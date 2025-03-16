@@ -1,7 +1,7 @@
 package com.thefluyter.fitnesstracker.service.exercise;
 
 import com.thefluyter.fitnesstracker.model.exercise.Exercise;
-import com.thefluyter.fitnesstracker.model.exercise.ExerciseData;
+import com.thefluyter.fitnesstracker.model.exercise.ExerciseDto;
 import com.thefluyter.fitnesstracker.repository.exercise.ExerciseRepository;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -35,16 +35,16 @@ class ExerciseServiceTest {
         when(exerciseRepository.findAll()).thenReturn(exercises);
 
         // WHEN getting all exercises
-        List<ExerciseData> exerciseDatas = exerciseService.getAllExercises();
+        List<ExerciseDto> exerciseDtos = exerciseService.getAllExercises();
 
         // THEN the exercises are sorted by name
         verify(exerciseRepository).findAll();
-        assertEquals(3, exerciseDatas.size());
-        assertThat(exerciseDatas.getFirst()).extracting("id", "name")
+        assertEquals(3, exerciseDtos.size());
+        assertThat(exerciseDtos.getFirst()).extracting("id", "name")
                 .containsExactly(1L, "Bench Press");
-        assertThat(exerciseDatas.get(1)).extracting("id", "name")
+        assertThat(exerciseDtos.get(1)).extracting("id", "name")
                 .containsExactly(3L, "Deadlift");
-        assertThat(exerciseDatas.get(2)).extracting("id", "name")
+        assertThat(exerciseDtos.get(2)).extracting("id", "name")
                 .containsExactly(2L, "Squat");
     }
 

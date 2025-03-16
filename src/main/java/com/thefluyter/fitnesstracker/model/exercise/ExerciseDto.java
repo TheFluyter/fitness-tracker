@@ -5,7 +5,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class ExerciseData {
+public class ExerciseDto {
     private Long id;
     private String name;
 }

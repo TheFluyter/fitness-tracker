@@ -1,6 +1,6 @@
 package com.thefluyter.fitnesstracker.service.exerciselog;
 
-import com.thefluyter.fitnesstracker.model.exerciselog.ExerciseLogData;
+import com.thefluyter.fitnesstracker.model.exerciselog.ExerciseLogDto;
 import com.thefluyter.fitnesstracker.service.exercise.ExerciseService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,14 +21,14 @@ class ExerciseLogServiceTest {
 
     @Test
     void testFindAll() {
-        List<ExerciseLogData> logs = exerciseLogService.findAll();
+        List<ExerciseLogDto> logs = exerciseLogService.findAll();
         assertEquals(2, logs.size());
     }
 
     @Test
     void tesFindById() {
-        ExerciseLogData expected = exerciseLogService.findByExerciseId(1L).getFirst();
-        assertEquals("lunges", expected.getExerciseData().getName());
+        ExerciseLogDto expected = exerciseLogService.findByExerciseLogById(1L).getFirst();
+        assertEquals("lunges", expected.getExerciseDto().getName());
         assertEquals(LocalDate.of(2025, 1, 20), expected.getDate());
     }
 }
