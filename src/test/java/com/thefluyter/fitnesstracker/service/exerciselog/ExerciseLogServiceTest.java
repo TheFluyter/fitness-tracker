@@ -1,5 +1,6 @@
 package com.thefluyter.fitnesstracker.service.exerciselog;
 
+import com.thefluyter.fitnesstracker.FitnessTrackerTest;
 import com.thefluyter.fitnesstracker.model.exerciselog.ExerciseLogDto;
 import com.thefluyter.fitnesstracker.service.exercise.ExerciseService;
 import org.junit.jupiter.api.Test;
@@ -14,7 +15,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @DataJpaTest
 @Import({ExerciseLogService.class, ExerciseService.class})
-class ExerciseLogServiceTest {
+class ExerciseLogServiceTest extends FitnessTrackerTest {
 
     @Autowired
     private ExerciseLogService exerciseLogService;
