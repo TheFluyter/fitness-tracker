@@ -42,7 +42,7 @@ public class ExerciseLogController {
     }
 
     @PostMapping("exercise-log")
-    public String addExerciseLog(@ModelAttribute ExerciseLogDto exerciseLogDto, @RequestParam("exerciseId") Long exerciseId) {
+    public String addExerciseToLog(@ModelAttribute ExerciseLogDto exerciseLogDto, @RequestParam("exerciseId") Long exerciseId) {
         ExerciseDto exerciseDto = exerciseService.findById(exerciseId);
         exerciseLogService.addExerciseToLog(exerciseLogDto, exerciseDto);
         return "redirect:/fitness/exercise-log";

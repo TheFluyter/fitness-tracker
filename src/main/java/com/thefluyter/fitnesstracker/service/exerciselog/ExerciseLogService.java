@@ -27,7 +27,6 @@ public class ExerciseLogService {
         return ExerciseLogMapper.INSTANCE.exerciseLogsToExerciseLogDtos(exerciseLogRepository.findByExercise_Id(exerciseId));
     }
 
-    // TODO: is this the right place to add an exercise to an exercise log?
     public void addExerciseToLog(ExerciseLogDto exerciseLogDto, ExerciseDto exerciseDto) {
         Exercise exercise = ExerciseMapper.INSTANCE.exerciseDtoToExercise(exerciseDto);
         ExerciseLog exerciseLog = ExerciseLogMapper.INSTANCE.exerciseLogDtoToExerciseLog(exerciseLogDto);

@@ -8,4 +8,4 @@
   - configure authorization
 - implement data mappers
 - expand unit/integration tests
-- improve error logging and error pages
+- improve error logging and error pages (reproduction create exercise with same name)
