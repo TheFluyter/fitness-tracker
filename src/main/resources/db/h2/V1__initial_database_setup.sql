@@ -1,6 +1,10 @@
+-- Create sequences for H2
+create sequence if not exists exercise_id_seq start with 1 increment by 1;
+create sequence if not exists exercise_routine_id_seq start with 1 increment by 1;
+
 create table exercise
 (
-    id            bigint auto_increment not null
+    id            bigint default next value for exercise_id_seq not null
         primary key,
     exercise_name varchar(255)           not null
         unique
