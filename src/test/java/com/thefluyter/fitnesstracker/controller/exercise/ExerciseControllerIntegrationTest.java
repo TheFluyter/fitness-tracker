@@ -17,6 +17,7 @@ import static org.hamcrest.Matchers.hasItems;
 import static org.hamcrest.Matchers.hasProperty;
 import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.notNullValue;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
@@ -65,14 +66,14 @@ class ExerciseControllerIntegrationTest extends FitnessTrackerTest {
     }
 
     @Test
-    void shouldNotSaveDuplicateExercise() throws Exception {
+    void shouldReturnErrorForDuplicateExercise() throws Exception {
         assertThat(exerciseRepository.findByName("lunges").getId()).isEqualTo(1L);
 
         mockMvc.perform(post("/fitness/exercises")
                 .contentType(MediaType.APPLICATION_FORM_URLENCODED)
                 .param("name", "lunges"))
-            .andExpect(status().isBadRequest());
-
+            .andExpect(status().isOk())
+            .andExpect(model().attribute("errorMessage", notNullValue()));
     }
 
 }

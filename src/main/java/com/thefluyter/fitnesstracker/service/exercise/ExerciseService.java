@@ -29,7 +29,7 @@ public class ExerciseService {
     public void addNewExercise(ExerciseDto exerciseDto) {
         Exercise exisitingExercise = exerciseRepository.findByName(exerciseDto.getName());
         if (exisitingExercise != null) {
-            throw new DuplicateExerciseException("Exercise with name %s already exists".formatted(exerciseDto.getName()));
+            throw new DuplicateExerciseException("Exercise with name '%s' already exists".formatted(exerciseDto.getName()));
         }
         Exercise saved = exerciseRepository.save(ExerciseMapper.INSTANCE.exerciseDtoToExercise(exerciseDto));
         log.info("Saved exercise '{}' to database", saved);

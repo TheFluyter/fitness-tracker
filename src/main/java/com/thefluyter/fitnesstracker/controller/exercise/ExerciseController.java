@@ -10,11 +10,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.server.ResponseStatusException;
-
-import java.util.List;
-
-import static org.springframework.http.HttpStatus.BAD_REQUEST;
 
 @Controller()
 @RequestMapping("fitness")
@@ -25,17 +20,18 @@ public class ExerciseController {
 
     @GetMapping("/exercises")
     public String getAllExercises(Model model) {
-        List<ExerciseDto> exercises = exerciseService.getAllExercises();
-        model.addAttribute("exercises", exercises);
+        model.addAttribute("exercises", exerciseService.getAllExercises());
         return "exercises";
     }
 
     @PostMapping("/exercises")
-    public String addExercise(@ModelAttribute ExerciseDto exerciseDto) {
+    public String addExercise(@ModelAttribute ExerciseDto exerciseDto, Model model) {
         try {
-        exerciseService.addNewExercise(exerciseDto);
+            exerciseService.addNewExercise(exerciseDto);
         } catch (DuplicateExerciseException e) {
-            throw new ResponseStatusException(BAD_REQUEST, e.getMessage());
+            model.addAttribute("errorMessage", e.getMessage());
+            model.addAttribute("exercises", exerciseService.getAllExercises());
+            return "exercises";
         }
         return "redirect:/fitness/exercises";
     }
