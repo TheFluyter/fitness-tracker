@@ -35,33 +35,44 @@ class ExerciseControllerIntegrationTest extends FitnessTrackerTest {
 
     @Test
     void shouldRetrieveAllExercises() throws Exception {
-        assertThat(exerciseRepository.findByNameContaining("lunges").getId()).isEqualTo(1L);
-        assertThat(exerciseRepository.findByNameContaining("flies").getId()).isEqualTo(2L);
+        assertThat(exerciseRepository.findByName("lunges").getId()).isEqualTo(1L);
+        assertThat(exerciseRepository.findByName("cable rows").getId()).isEqualTo(5L);
 
         mockMvc.perform(get("/fitness/exercises"))
                 .andExpect(status().isOk())
                 .andExpect(model().attributeExists("exercises"))
-                .andExpect(model().attribute("exercises", hasSize(2)))
+                .andExpect(model().attribute("exercises", hasSize(10)))
                 .andExpect(model().attribute("exercises", hasItems(
                         allOf(
                                 hasProperty("id", is(1L)),
                                 hasProperty("name", is("lunges"))
                         ),
                         allOf(
-                                hasProperty("id", is(2L)),
-                                hasProperty("name", is("flies"))
+                                hasProperty("id", is(5L)),
+                                hasProperty("name", is("cable rows"))
                         )
                 )));
     }
 
     @Test
     void shouldSaveExercise() throws Exception {
-        assertThat(exerciseRepository.findByNameContaining("lunges").getId()).isEqualTo(1L);
-        assertThat(exerciseRepository.findByNameContaining("flies").getId()).isEqualTo(2L);
+        mockMvc.perform(post("/fitness/exercises")
+                .contentType(MediaType.APPLICATION_FORM_URLENCODED)
+                .param("name", "dumbbell curls"))
+            .andExpect(status().is3xxRedirection());
+
+        assertThat(exerciseRepository.findByName("dumbbell curls").getId()).isEqualTo(11L);
+    }
+
+    @Test
+    void shouldNotSaveDuplicateExercise() throws Exception {
+        assertThat(exerciseRepository.findByName("lunges").getId()).isEqualTo(1L);
 
         mockMvc.perform(post("/fitness/exercises")
-            .contentType(MediaType.APPLICATION_FORM_URLENCODED)
-            .param("name", "pullups"));
+                .contentType(MediaType.APPLICATION_FORM_URLENCODED)
+                .param("name", "lunges"))
+            .andExpect(status().isBadRequest());
+
     }
 
 }

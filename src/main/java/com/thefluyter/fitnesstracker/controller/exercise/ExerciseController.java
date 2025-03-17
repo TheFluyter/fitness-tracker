@@ -1,5 +1,6 @@
 package com.thefluyter.fitnesstracker.controller.exercise;
 
+import com.thefluyter.fitnesstracker.exception.DuplicateExerciseException;
 import com.thefluyter.fitnesstracker.model.exercise.ExerciseDto;
 import com.thefluyter.fitnesstracker.service.exercise.ExerciseService;
 import lombok.RequiredArgsConstructor;
@@ -9,8 +10,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
+
+import static org.springframework.http.HttpStatus.BAD_REQUEST;
 
 @Controller()
 @RequestMapping("fitness")
@@ -28,7 +32,11 @@ public class ExerciseController {
 
     @PostMapping("/exercises")
     public String addExercise(@ModelAttribute ExerciseDto exerciseDto) {
+        try {
         exerciseService.addNewExercise(exerciseDto);
+        } catch (DuplicateExerciseException e) {
+            throw new ResponseStatusException(BAD_REQUEST, e.getMessage());
+        }
         return "redirect:/fitness/exercises";
     }
 }

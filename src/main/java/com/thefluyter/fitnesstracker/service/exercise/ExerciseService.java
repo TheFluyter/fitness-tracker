@@ -1,5 +1,6 @@
 package com.thefluyter.fitnesstracker.service.exercise;
 
+import com.thefluyter.fitnesstracker.exception.DuplicateExerciseException;
 import com.thefluyter.fitnesstracker.model.exercise.Exercise;
 import com.thefluyter.fitnesstracker.model.exercise.ExerciseDto;
 import com.thefluyter.fitnesstracker.repository.exercise.ExerciseRepository;
@@ -26,8 +27,12 @@ public class ExerciseService {
     }
 
     public void addNewExercise(ExerciseDto exerciseDto) {
+        Exercise exisitingExercise = exerciseRepository.findByName(exerciseDto.getName());
+        if (exisitingExercise != null) {
+            throw new DuplicateExerciseException("Exercise with name %s already exists".formatted(exerciseDto.getName()));
+        }
         Exercise saved = exerciseRepository.save(ExerciseMapper.INSTANCE.exerciseDtoToExercise(exerciseDto));
-        log.info("Saved exercise '{}'", saved);
+        log.info("Saved exercise '{}' to database", saved);
     }
 
     public ExerciseDto findById(long id) {
