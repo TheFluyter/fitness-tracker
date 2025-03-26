@@ -20,16 +20,16 @@ public class ExerciseLogService {
     private final ExerciseLogRepository exerciseLogRepository;
 
     public List<ExerciseLogDto> findAll() {
-        return ExerciseLogMapper.INSTANCE.exerciseLogsToExerciseLogDtos(exerciseLogRepository.findAll());
+        return ExerciseLogMapper.INSTANCE.toExerciseLogDtos(exerciseLogRepository.findAll());
     }
 
     public List<ExerciseLogDto> findByExerciseLogById(Long exerciseId) {
-        return ExerciseLogMapper.INSTANCE.exerciseLogsToExerciseLogDtos(exerciseLogRepository.findByExercise_Id(exerciseId));
+        return ExerciseLogMapper.INSTANCE.toExerciseLogDtos(exerciseLogRepository.findByExercise_Id(exerciseId));
     }
 
     public void addExerciseToLog(ExerciseLogDto exerciseLogDto, ExerciseDto exerciseDto) {
         Exercise exercise = ExerciseMapper.INSTANCE.exerciseDtoToExercise(exerciseDto);
-        ExerciseLog exerciseLog = ExerciseLogMapper.INSTANCE.exerciseLogDtoToExerciseLog(exerciseLogDto);
+        ExerciseLog exerciseLog = ExerciseLogMapper.INSTANCE.toExerciseLog(exerciseLogDto);
         exerciseLog.setExercise(exercise);
 
         ExerciseLog saved = exerciseLogRepository.save(exerciseLog);

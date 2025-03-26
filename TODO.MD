@@ -6,6 +6,5 @@
   - csrf issues
   - configure authentication
   - configure authorization
-- implement data mappers
 - expand unit/integration tests
-- improve error logging and error pages (reproduction create exercise with same name)
+- improve error logging and error pages (reproduction for unexpected errors: change name of the error modal)
