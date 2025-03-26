@@ -28,7 +28,7 @@ public class ExerciseLogService {
     }
 
     public void addExerciseToLog(ExerciseLogDto exerciseLogDto, ExerciseDto exerciseDto) {
-        Exercise exercise = ExerciseMapper.INSTANCE.exerciseDtoToExercise(exerciseDto);
+        Exercise exercise = ExerciseMapper.INSTANCE.toExercise(exerciseDto);
         ExerciseLog exerciseLog = ExerciseLogMapper.INSTANCE.toExerciseLog(exerciseLogDto);
         exerciseLog.setExercise(exercise);
 

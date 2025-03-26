@@ -21,7 +21,7 @@ public class ExerciseService {
     private final ExerciseRepository exerciseRepository;
 
     public List<ExerciseDto> getAllExercises() {
-        return ExerciseMapper.INSTANCE.exercisesToExerciseDtos(exerciseRepository.findAll()).stream()
+        return ExerciseMapper.INSTANCE.toExerciseDtos(exerciseRepository.findAll()).stream()
             .sorted(Comparator.comparing(ExerciseDto::getName))
             .toList();
     }
@@ -31,12 +31,12 @@ public class ExerciseService {
         if (exisitingExercise != null) {
             throw new DuplicateExerciseException("Exercise with name '%s' already exists".formatted(exerciseDto.getName()));
         }
-        Exercise saved = exerciseRepository.save(ExerciseMapper.INSTANCE.exerciseDtoToExercise(exerciseDto));
+        Exercise saved = exerciseRepository.save(ExerciseMapper.INSTANCE.toExercise(exerciseDto));
         log.info("Saved exercise '{}' to database", saved);
     }
 
     public ExerciseDto findById(long id) {
         Exercise exercise = exerciseRepository.findById(id).orElse(null);
-        return ExerciseMapper.INSTANCE.exerciseToExerciseDto(exercise);
+        return ExerciseMapper.INSTANCE.toExerciseDto(exercise);
     }
 }

@@ -13,10 +13,10 @@ public interface ExerciseMapper {
 
     ExerciseMapper INSTANCE = Mappers.getMapper(ExerciseMapper.class);
 
-    List<ExerciseDto> exercisesToExerciseDtos(Collection<Exercise> exercises);
+    List<ExerciseDto> toExerciseDtos(Collection<Exercise> exercises);
 
-    ExerciseDto exerciseToExerciseDto(Exercise exercise);
+    ExerciseDto toExerciseDto(Exercise exercise);
 
-    Exercise exerciseDtoToExercise(ExerciseDto exerciseDto);
+    Exercise toExercise(ExerciseDto exerciseDto);
 
 }
