@@ -1,6 +1,7 @@
 package com.thefluyter.fitnesstracker.service.exercise;
 
 import com.thefluyter.fitnesstracker.exception.DuplicateExerciseException;
+import com.thefluyter.fitnesstracker.exception.ExerciseNotFoundException;
 import com.thefluyter.fitnesstracker.model.exercise.Exercise;
 import com.thefluyter.fitnesstracker.model.exercise.ExerciseDto;
 import com.thefluyter.fitnesstracker.repository.exercise.ExerciseRepository;
@@ -37,7 +38,10 @@ public class ExerciseService {
     }
 
     public ExerciseDto findById(long id) {
-        Exercise exercise = exerciseRepository.findById(id).orElse(null);
-        return ExerciseMapper.INSTANCE.toExerciseDto(exercise);
+        Optional<Exercise> exercise = exerciseRepository.findById(id);
+        if (exercise.isEmpty()) {
+            throw new ExerciseNotFoundException("Exercise with id '%d' not found".formatted(id));
+        }
+        return ExerciseMapper.INSTANCE.toExerciseDto(exercise.get());
     }
 }
