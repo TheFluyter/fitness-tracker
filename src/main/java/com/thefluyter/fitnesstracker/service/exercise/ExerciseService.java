@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Comparator;
 import java.util.List;
+import java.util.Optional;
 
 @Component
 @Slf4j
@@ -27,8 +28,8 @@ public class ExerciseService {
     }
 
     public void addNewExercise(ExerciseDto exerciseDto) {
-        Exercise exisitingExercise = exerciseRepository.findByName(exerciseDto.getName());
-        if (exisitingExercise != null) {
+        Optional<Exercise> exercise = exerciseRepository.findByName(exerciseDto.getName());
+        if (exercise.isPresent()) {
             throw new DuplicateExerciseException("Exercise with name '%s' already exists".formatted(exerciseDto.getName()));
         }
         Exercise saved = exerciseRepository.save(ExerciseMapper.INSTANCE.toExercise(exerciseDto));

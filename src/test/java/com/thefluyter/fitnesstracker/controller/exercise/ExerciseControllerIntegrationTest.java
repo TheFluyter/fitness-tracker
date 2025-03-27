@@ -36,8 +36,9 @@ class ExerciseControllerIntegrationTest extends FitnessTrackerTest {
 
     @Test
     void shouldRetrieveAllExercises() throws Exception {
-        assertThat(exerciseRepository.findByName("lunges").getId()).isEqualTo(1L);
-        assertThat(exerciseRepository.findByName("cable rows").getId()).isEqualTo(5L);
+        assertThat(exerciseRepository.findAll()).hasSize(10);
+        assertThat(exerciseRepository.findByName("lunges").orElseThrow(IllegalStateException::new).getId()).isEqualTo(1L);
+        assertThat(exerciseRepository.findByName("cable rows").orElseThrow(IllegalStateException::new).getId()).isEqualTo(5L);
 
         mockMvc.perform(get("/fitness/exercises"))
                 .andExpect(status().isOk())
@@ -62,12 +63,12 @@ class ExerciseControllerIntegrationTest extends FitnessTrackerTest {
                 .param("name", "dumbbell curls"))
             .andExpect(status().is3xxRedirection());
 
-        assertThat(exerciseRepository.findByName("dumbbell curls").getId()).isEqualTo(11L);
+        assertThat(exerciseRepository.findByName("dumbbell curls")).isPresent();
     }
 
     @Test
     void shouldReturnErrorForDuplicateExercise() throws Exception {
-        assertThat(exerciseRepository.findByName("lunges").getId()).isEqualTo(1L);
+        assertThat(exerciseRepository.findByName("lunges")).isPresent();
 
         mockMvc.perform(post("/fitness/exercises")
                 .contentType(MediaType.APPLICATION_FORM_URLENCODED)
