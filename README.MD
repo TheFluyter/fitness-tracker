@@ -19,7 +19,7 @@ Fitness Tracker is a Spring Boot application designed to manage and track exerci
 ### Installation
 1. Clone the repository:
     ```sh
-    git clone https://github.com/yourusername/fitnesstracker.git
+    git clone https://github.com/TheFluyter/fitnesstracker.git
     cd fitnesstracker
     ```
 
