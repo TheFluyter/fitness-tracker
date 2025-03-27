@@ -2,7 +2,10 @@ package com.thefluyter.fitnesstracker.model.exerciselog;
 
 import com.thefluyter.fitnesstracker.model.exercise.Exercise;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDate;
@@ -11,6 +14,9 @@ import java.time.LocalDate;
 @Table(name = "exercise_log")
 @Getter
 @Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class ExerciseLog {
 
     @Id

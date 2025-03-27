@@ -22,12 +22,8 @@ class ExerciseMapperTest {
 
         // THEN the ExerciseDtos are returned
         assertThat(exerciseDtos).hasSize(3);
-        assertThat(exerciseDtos)
-            .extracting("id")
-            .containsExactly(1L, 2L, 3L);
-        assertThat(exerciseDtos)
-            .extracting("name")
-            .containsExactly("Bench Press", "Barbell Curl", "Pull-ups");
+        assertThat(exerciseDtos).extracting(ExerciseDto::getId).containsExactly(1L, 2L, 3L);
+        assertThat(exerciseDtos).extracting(ExerciseDto::getName).containsExactly("Bench Press", "Barbell Curl", "Pull-ups");
     }
 
     @Test
