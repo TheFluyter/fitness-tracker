@@ -23,11 +23,11 @@ public class ExerciseLogService {
         return ExerciseLogMapper.INSTANCE.toExerciseLogDtos(exerciseLogRepository.findAll());
     }
 
-    public List<ExerciseLogDto> findByExerciseLogById(Long exerciseId) {
+    public List<ExerciseLogDto> findLogsByExerciseId(Long exerciseId) {
         return ExerciseLogMapper.INSTANCE.toExerciseLogDtos(exerciseLogRepository.findByExercise_Id(exerciseId));
     }
 
-    public void addExerciseToLog(ExerciseLogDto exerciseLogDto, ExerciseDto exerciseDto) {
+    public void addExerciseLog(ExerciseLogDto exerciseLogDto, ExerciseDto exerciseDto) {
         Exercise exercise = ExerciseMapper.INSTANCE.toExercise(exerciseDto);
         ExerciseLog exerciseLog = ExerciseLogMapper.INSTANCE.toExerciseLog(exerciseLogDto);
         exerciseLog.setExercise(exercise);

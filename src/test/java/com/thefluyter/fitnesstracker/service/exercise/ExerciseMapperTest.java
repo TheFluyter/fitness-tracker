@@ -20,7 +20,7 @@ class ExerciseMapperTest {
         // WHEN toExerciseDtos is called
         List<ExerciseDto> exerciseDtos = ExerciseMapper.INSTANCE.toExerciseDtos(List.of(exercise1, exercise2, exercise3));
 
-        // THEN the ExerciseDtos are returned
+        // THEN the exercise DTOs are returned
         assertThat(exerciseDtos).hasSize(3);
         assertThat(exerciseDtos).extracting(ExerciseDto::getId).containsExactly(1L, 2L, 3L);
         assertThat(exerciseDtos).extracting(ExerciseDto::getName).containsExactly("Bench Press", "Barbell Curl", "Pull-ups");
@@ -34,20 +34,20 @@ class ExerciseMapperTest {
         // WHEN toExerciseDto is called
         ExerciseDto exerciseDto = ExerciseMapper.INSTANCE.toExerciseDto(exercise);
 
-        // THEN the ExerciseDto is returned
+        // THEN the exercise DTO is returned
         assertThat(exerciseDto.getId()).isEqualTo(1L);
         assertThat(exerciseDto.getName()).isEqualTo("Bench Press");
     }
 
     @Test
     void shouldMapToExercise() {
-        // GIVEN an exerciseDto
+        // GIVEN an exercise DTO
         ExerciseDto exerciseDto = new ExerciseDto(1L, "Bench Press");
 
         // WHEN toExercise is called
         Exercise exercise = ExerciseMapper.INSTANCE.toExercise(exerciseDto);
 
-        // THEN the Exercise is returned
+        // THEN the exercise is returned
         assertThat(exercise.getId()).isEqualTo(1L);
         assertThat(exercise.getName()).isEqualTo("Bench Press");
     }

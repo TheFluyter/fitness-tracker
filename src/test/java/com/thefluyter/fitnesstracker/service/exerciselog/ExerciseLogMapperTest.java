@@ -17,7 +17,7 @@ class ExerciseLogMapperTest {
     void shouldMapToExerciseLog() {
         // GIVEN an ExerciseLogDto
         ExerciseLogDto exerciseLogDto = ExerciseLogDto.builder()
-            .id(1)
+            .id(1L)
             .exerciseDto(new ExerciseDto(1L, "Bench Press"))
             .reps1(10)
             .reps2(8)
@@ -48,7 +48,7 @@ class ExerciseLogMapperTest {
     void shouldMapToExerciseDtos() {
         // GIVEN a list of Exercises
         ExerciseLog exercise1 = ExerciseLog.builder()
-            .id(1)
+            .id(1L)
             .exercise(new Exercise(1L, "Bench Press"))
             .reps1(10)
             .reps2(8)
@@ -60,7 +60,7 @@ class ExerciseLogMapperTest {
             .build();
 
         ExerciseLog exercise2 = ExerciseLog.builder()
-            .id(2)
+            .id(2L)
             .exercise(new Exercise(2L, "Barbell Squats"))
             .reps1(5)
             .reps2(4)
@@ -76,7 +76,7 @@ class ExerciseLogMapperTest {
 
         // THEN the ExerciseLogDtos is returned
         assertThat(exerciseLogDtos).hasSize(2);
-        assertThat(exerciseLogDtos).extracting(ExerciseLogDto::getId).containsExactlyInAnyOrder(1, 2);
+        assertThat(exerciseLogDtos).extracting(ExerciseLogDto::getId).containsExactlyInAnyOrder(1L, 2L);
         assertThat(exerciseLogDtos).extracting(ExerciseLogDto::getDate).containsExactlyInAnyOrder(LocalDate.of(2020, 1, 1), LocalDate.of(2020, 1, 20));
         assertThat(exerciseLogDtos).extracting(ExerciseLogDto::getReps1).containsExactlyInAnyOrder(10, 5);
         assertThat(exerciseLogDtos).extracting(ExerciseLogDto::getReps2).containsExactlyInAnyOrder(8, 4);
@@ -92,7 +92,7 @@ class ExerciseLogMapperTest {
     void shouldMapToExerciseLogDto() {
         // GIVEN an ExerciseLog
         ExerciseLog exerciseLog = ExerciseLog.builder()
-            .id(1)
+            .id(1L)
             .exercise(new Exercise(1L, "Bench Press"))
             .reps1(10)
             .reps2(8)

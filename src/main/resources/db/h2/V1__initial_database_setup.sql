@@ -1,5 +1,6 @@
 -- Create sequences for H2
 create sequence if not exists exercise_id_seq start with 1 increment by 1;
+create sequence if not exists exercise_log_id_seq start with 11 increment by 1;
 create sequence if not exists exercise_routine_id_seq start with 1 increment by 1;
 
 create table exercise

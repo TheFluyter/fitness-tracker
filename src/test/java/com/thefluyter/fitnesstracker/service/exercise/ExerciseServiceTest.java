@@ -12,7 +12,6 @@ import org.mockito.Captor;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.context.annotation.Import;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,14 +24,13 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
-@Import({ExerciseMapper.class})
 class ExerciseServiceTest {
-
-    @InjectMocks
-    ExerciseService exerciseService;
 
     @Mock
     ExerciseRepository exerciseRepository;
+
+    @InjectMocks
+    ExerciseService exerciseService;
 
     @Captor
     private ArgumentCaptor<Exercise> exerciseCaptor;

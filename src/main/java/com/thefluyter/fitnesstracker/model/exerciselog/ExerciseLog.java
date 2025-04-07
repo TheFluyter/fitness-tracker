@@ -22,7 +22,7 @@ public class ExerciseLog {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "exercise_log_seq")
     @SequenceGenerator(name = "exercise_log_seq", sequenceName = "exercise_log_id_seq", allocationSize = 1)
-    private Integer id;
+    private Long id;
 
     @ManyToOne
     @JoinColumn(name = "exercise_id", referencedColumnName = "id", nullable = false)

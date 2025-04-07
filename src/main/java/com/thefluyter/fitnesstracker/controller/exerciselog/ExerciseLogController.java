@@ -27,7 +27,7 @@ public class ExerciseLogController {
         String selectedExerciseName = null;
 
         if (exerciseId != null) {
-            exerciseLogs = exerciseLogService.findByExerciseLogById(exerciseId);
+            exerciseLogs = exerciseLogService.findLogsByExerciseId(exerciseId);
             selectedExerciseName = exerciseService.findById(exerciseId).getName();
         } else {
             exerciseLogs = exerciseLogService.findAll();
@@ -42,9 +42,9 @@ public class ExerciseLogController {
     }
 
     @PostMapping("exercise-log")
-    public String addExerciseToLog(@ModelAttribute ExerciseLogDto exerciseLogDto, @RequestParam("exerciseId") Long exerciseId) {
+    public String addExerciseLog(@ModelAttribute ExerciseLogDto exerciseLogDto, @RequestParam("exerciseId") Long exerciseId) {
         ExerciseDto exerciseDto = exerciseService.findById(exerciseId);
-        exerciseLogService.addExerciseToLog(exerciseLogDto, exerciseDto);
+        exerciseLogService.addExerciseLog(exerciseLogDto, exerciseDto);
         return "redirect:/fitness/exercise-log";
     }
 }

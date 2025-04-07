@@ -16,7 +16,7 @@ import java.time.LocalDate;
 @Builder
 public class ExerciseLogDto {
 
-    private Integer id;
+    private Long id;
     private ExerciseDto exerciseDto;
     private Integer reps1;
     private Integer reps2;
