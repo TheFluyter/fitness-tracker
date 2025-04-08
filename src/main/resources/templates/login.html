@@ -16,19 +16,28 @@
 <body>
 <div th:insert="~{fragments/header :: header}"></div>
 
-<div class="container mt-5">
-    <h1>Login</h1>
+<div class="container mt-5" style="max-width: 400px;">
+    <h1 class="text-center mb-4">Login</h1>
+    <p class="text-center text-muted mb-4">Stay fit, stay focused—your journey starts here.</p>
     <form th:action="@{/login}" method="post">
-        <div>
-            <label for="username">Username:</label>
-            <input type="text" class="form-control" name="username" id="username" required>
+        <div class="form-group">
+            <input type="text" class="form-control form-control-lg rounded" name="username"
+                   placeholder="Username" required>
         </div>
-        <div>
-            <label for="password">Password:</label>
-            <input type="password" class="form-control" name="password" id="password" required>
+        <div class="form-group mt-3">
+            <input type="password" class="form-control form-control-lg rounded" name="password"
+                   placeholder="Password" required>
         </div>
-        <button type="submit" class="btn btn-primary mt-3">Login</button>
+        <button type="submit" class="btn btn-primary btn-lg btn-block rounded mt-4"
+                style="background-color: #1877f2;">Log In</button>
     </form>
+
+    <hr class="my-4">
+
+    <div class="text-center">
+        <a th:href="@{/register}" class="btn btn-success btn-lg rounded">Create new account</a>
+    </div>
 </div>
+
 </body>
 </html>

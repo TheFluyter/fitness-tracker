@@ -2,15 +2,24 @@
 <html lang="en">
 
 <head>
-    <meta charset="ISO-8859-1">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registration Success</title>
-    <link rel="stylesheet" type="text/css"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/styles.css">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.4.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </head>
 
 <body>
-<div class="container text-center">
-    <h3>You have signed up successfully!</h3>
-    <h4><a href="/login">Click here to Login</a></h4>
+<div th:insert="~{fragments/header :: header}"></div>
+
+<div class="container mt-5 text-center" style="max-width: 400px;">
+    <h3 class="mb-4">You have signed up successfully!</h3>
+    <p class="text-muted mb-4">Welcome aboard! You're one step away from starting your journey.</p>
+    <a href="/login" class="btn btn-primary btn-lg btn-block rounded" style="background-color: #1877f2;">Click here to Login</a>
 </div>
+
 </body>
 </html>
