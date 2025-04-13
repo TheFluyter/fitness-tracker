@@ -1,4 +1,5 @@
 ### TODO
+- make username clickable and add logout button
 - fix security issues
   - csrf issues
   - configure authentication
