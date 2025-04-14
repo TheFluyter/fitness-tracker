@@ -40,7 +40,7 @@ class ExerciseControllerIntegrationTest extends FitnessTrackerTest {
         assertThat(exerciseRepository.findByName("lunges").orElseThrow(IllegalStateException::new).getId()).isEqualTo(1L);
         assertThat(exerciseRepository.findByName("cable rows").orElseThrow(IllegalStateException::new).getId()).isEqualTo(5L);
 
-        mockMvc.perform(get("/fitness/exercises"))
+        mockMvc.perform(get("/fitness/exercises").with(userAuth()))
                 .andExpect(status().isOk())
                 .andExpect(model().attributeExists("exercises"))
                 .andExpect(model().attribute("exercises", hasSize(10)))
@@ -59,6 +59,7 @@ class ExerciseControllerIntegrationTest extends FitnessTrackerTest {
     @Test
     void shouldSaveExercise() throws Exception {
         mockMvc.perform(post("/fitness/exercises")
+                .with(userAuth())
                 .contentType(MediaType.APPLICATION_FORM_URLENCODED)
                 .param("name", "dumbbell curls"))
             .andExpect(status().is3xxRedirection());
@@ -71,6 +72,7 @@ class ExerciseControllerIntegrationTest extends FitnessTrackerTest {
         assertThat(exerciseRepository.findByName("lunges")).isPresent();
 
         mockMvc.perform(post("/fitness/exercises")
+                .with(userAuth())
                 .contentType(MediaType.APPLICATION_FORM_URLENCODED)
                 .param("name", "lunges"))
             .andExpect(status().isOk())

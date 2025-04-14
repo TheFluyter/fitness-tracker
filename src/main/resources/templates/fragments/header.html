@@ -6,11 +6,12 @@
                 <div>
                     <a href="/fitness/exercise-log" class="text-decoration-none text-secondary">LOG</a>
                     <a href="/fitness/exercises" class="text-decoration-none text-secondary ml-3">EXERCISES</a>
-                    <a href="/login" class="text-decoration-none text-primary ml-3">LOGIN</a>
+                    <a href="/login" class="text-decoration-none text-primary ml-3"
+                       th:if="${#authentication.principal == 'anonymousUser'}">LOGIN</a>
                     <div class="dropdown d-inline ml-3"
                          th:if="${#authentication.principal != 'anonymousUser'}">
                         <a class="dropdown-toggle text-success text-decoration-none" href="#" role="button" data-bs-toggle="dropdown">
-                            <span th:text="${#authentication.name}">User</span>
+                            <span th:text="${#authentication.principal.displayName}">User</span>
                         </a>
                         <ul class="dropdown-menu">
                             <li><a class="dropdown-item" href="/logout">Logout</a></li>

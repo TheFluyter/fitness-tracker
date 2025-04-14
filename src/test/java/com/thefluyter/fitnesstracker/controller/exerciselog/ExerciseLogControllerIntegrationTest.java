@@ -48,7 +48,7 @@ class ExerciseLogControllerIntegrationTest extends FitnessTrackerTest {
         assertThat(exerciseLogRepository.findById(5L)).isPresent();
 
         // WHEN retrieving all exercise logs
-        mockMvc.perform(get("/fitness/exercise-log"))
+        mockMvc.perform(get("/fitness/exercise-log").with(userAuth()))
             // THEN the response should be successful and return all exercise logs
             .andExpect(status().isOk())
             .andExpect(model().attributeExists("exerciseLogs"))
@@ -88,7 +88,7 @@ class ExerciseLogControllerIntegrationTest extends FitnessTrackerTest {
         assertThat(exerciseLogRepository.findById(5L)).isPresent();
 
         // WHEN retrieving exercise logs for exercise with id 1
-        mockMvc.perform(get("/fitness/exercise-log?exerciseId=1"))
+        mockMvc.perform(get("/fitness/exercise-log?exerciseId=1").with(userAuth()))
             // THEN the response should be successful and return all exercise logs for exercise with id 1
             .andExpect(status().isOk())
             .andExpect(model().attributeExists("exerciseLogs"))
@@ -117,6 +117,7 @@ class ExerciseLogControllerIntegrationTest extends FitnessTrackerTest {
 
         // WHEN adding a new exercise log
         mockMvc.perform(post("/fitness/exercise-log")
+                .with(userAuth())
                 .param("exerciseId", "1")
                 .flashAttr("exerciseLogDto", exerciseLogDto))
             .andExpect(status().is3xxRedirection())
