@@ -4,6 +4,8 @@ import com.thefluyter.fitnesstracker.model.exercise.Exercise;
 import com.thefluyter.fitnesstracker.model.exercise.ExerciseDto;
 import com.thefluyter.fitnesstracker.model.exerciselog.ExerciseLog;
 import com.thefluyter.fitnesstracker.model.exerciselog.ExerciseLogDto;
+import com.thefluyter.fitnesstracker.model.exerciselog.UserExerciseLog;
+import com.thefluyter.fitnesstracker.repository.exercise.UserExerciseLogRepository;
 import com.thefluyter.fitnesstracker.repository.exerciselog.ExerciseLogRepository;
 import com.thefluyter.fitnesstracker.service.exercise.ExerciseMapper;
 import lombok.RequiredArgsConstructor;
@@ -12,19 +14,23 @@ import org.springframework.stereotype.Component;
 
 import java.util.List;
 
+import static com.thefluyter.fitnesstracker.config.AuthenticationUtils.getCurrentUser;
+import static com.thefluyter.fitnesstracker.config.AuthenticationUtils.getCurrentUserId;
+
 @Component
 @RequiredArgsConstructor
 @Slf4j
 public class ExerciseLogService {
 
     private final ExerciseLogRepository exerciseLogRepository;
+    private final UserExerciseLogRepository userExerciseLogRepository;
 
     public List<ExerciseLogDto> findAll() {
-        return ExerciseLogMapper.INSTANCE.toExerciseLogDtos(exerciseLogRepository.findAll());
+        return ExerciseLogMapper.INSTANCE.toExerciseLogDtos(exerciseLogRepository.findAllForUser(getCurrentUserId()));
     }
 
     public List<ExerciseLogDto> findLogsByExerciseId(Long exerciseId) {
-        return ExerciseLogMapper.INSTANCE.toExerciseLogDtos(exerciseLogRepository.findByExercise_Id(exerciseId));
+        return ExerciseLogMapper.INSTANCE.toExerciseLogDtos(exerciseLogRepository.findByExerciseIdForUser(exerciseId, getCurrentUserId()));
     }
 
     public void addExerciseLog(ExerciseLogDto exerciseLogDto, ExerciseDto exerciseDto) {
@@ -33,6 +39,7 @@ public class ExerciseLogService {
         exerciseLog.setExercise(exercise);
 
         ExerciseLog saved = exerciseLogRepository.save(exerciseLog);
+        userExerciseLogRepository.save(new UserExerciseLog(getCurrentUser(), saved));
         log.info("Saved exercise {}", saved);
     }
 }

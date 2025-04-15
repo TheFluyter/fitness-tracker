@@ -29,7 +29,7 @@ public class ExerciseService {
     private final UserExerciseRepository userExerciseRepository;
 
     public List<ExerciseDto> getAllExercises() {
-        return ExerciseMapper.INSTANCE.toExerciseDtos(exerciseRepository.findAllByUserId(getCurrentUserId())).stream()
+        return ExerciseMapper.INSTANCE.toExerciseDtos(exerciseRepository.findAllForUser(getCurrentUserId())).stream()
             .sorted(Comparator.comparing(ExerciseDto::getName))
             .toList();
     }
@@ -37,7 +37,7 @@ public class ExerciseService {
     public void addNewExercise(ExerciseDto exerciseDto) {
         Optional<Exercise> exercise = exerciseRepository.findByName(exerciseDto.getName());
         if (exercise.isPresent()) {
-            boolean userHasExercise = userExerciseRepository.existsByExerciseIdAndUserId(exercise.get().getId(), getCurrentUserId());
+            boolean userHasExercise = userExerciseRepository.existsByExerciseIdForUser(exercise.get().getId(), getCurrentUserId());
             if (userHasExercise) {
                 throw new DuplicateExerciseException("Exercise with name '%s' already exists".formatted(exerciseDto.getName()));
             } else {
@@ -51,7 +51,7 @@ public class ExerciseService {
     }
 
     public ExerciseDto findById(long id) {
-        Optional<Exercise> exercise = exerciseRepository.findById(id);
+        Optional<Exercise> exercise = exerciseRepository.findByIdForUser(id, getCurrentUserId());
         if (exercise.isEmpty()) {
             throw new ExerciseNotFoundException("Exercise with id '%d' not found".formatted(id));
         }

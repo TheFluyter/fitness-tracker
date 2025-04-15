@@ -48,4 +48,9 @@ public class ExerciseLog {
 
     @Column(name = "date", nullable = false)
     private LocalDate date;
+
+    @Override
+    public String toString() {
+        return "ExerciseLog '%d' for exercise '%s' on date %tF".formatted(id, exercise.getName(), date);
+    }
 }

@@ -56,7 +56,7 @@ class ExerciseLogServiceTest {
     void shouldReturnExerciseLogsByExerciseId() {
         // GIVEN a list of exercise logs
         List<ExerciseLog> exerciseLogs = createExerciseLogsForOneExercise();
-        when(exerciseLogRepository.findByExercise_Id(1L)).thenReturn(exerciseLogs);
+        when(exerciseLogRepository.findByExerciseIdForUser(1L)).thenReturn(exerciseLogs);
 
         // WHEN getting all exercise logs for one exercise
         List<ExerciseLogDto> logs = exerciseLogService.findLogsByExerciseId(1L);

@@ -14,8 +14,10 @@ public interface ExerciseRepository extends JpaRepository<Exercise, Long> {
     Optional<Exercise> findByName(String name);
 
     @Query("SELECT e FROM Exercise e JOIN UserExercise ue ON e.id = ue.exercise.id WHERE ue.user.id = :userId")
-    List<Exercise> findAllByUserId(@Param("userId") Long userId);
+    List<Exercise> findAllForUser(@Param("userId") Long userId);
 
     @Query("SELECT e FROM Exercise e JOIN UserExercise ue ON e.id = ue.exercise.id WHERE e.id = :id AND ue.user.id = :userId")
-    Optional<Exercise> findByIdAndUserId(Long id, Long userId);
+    Optional<Exercise> findByIdForUser(Long id, Long userId);
+
+
 }

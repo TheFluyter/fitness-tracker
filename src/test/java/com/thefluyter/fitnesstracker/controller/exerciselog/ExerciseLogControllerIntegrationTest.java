@@ -101,7 +101,7 @@ class ExerciseLogControllerIntegrationTest extends FitnessTrackerTest {
     @Test
     void shouldAddExerciseLog() throws Exception {
         // GIVEN two existing logs for lunges
-        assertThat(exerciseLogRepository.findByExercise_Id(1L)).hasSize(2);
+        assertThat(exerciseLogRepository.findByExerciseIdForUser(1L)).hasSize(2);
 
         ExerciseLogDto exerciseLogDto = ExerciseLogDto.builder()
             .date(LocalDate.of(2025, Month.JANUARY, 20))
@@ -124,8 +124,8 @@ class ExerciseLogControllerIntegrationTest extends FitnessTrackerTest {
             .andExpect(redirectedUrl("/fitness/exercise-log"));
 
         // THEN the response should be successful and the new exercise log should be added
-        assertThat(exerciseLogRepository.findByExercise_Id(1L)).hasSize(3);
-        List<ExerciseLog> exerciseLogs = exerciseLogRepository.findByExercise_Id(1L);
+        assertThat(exerciseLogRepository.findByExerciseIdForUser(1L)).hasSize(3);
+        List<ExerciseLog> exerciseLogs = exerciseLogRepository.findByExerciseIdForUser(1L);
         assertThat(exerciseLogs)
             .anyMatch(log -> log.getReps1().equals(20))
             .anyMatch(log -> log.getReps2().equals(18))
