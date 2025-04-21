@@ -36,14 +36,17 @@ class ExerciseControllerIntegrationTest extends FitnessTrackerTest {
 
     @Test
     void shouldRetrieveAllExercises() throws Exception {
-        assertThat(exerciseRepository.findAll()).hasSize(10);
+        // GIVEN 6 exercises for a user
+        assertThat(exerciseRepository.findAllForUser(getUserId())).hasSize(6);
         assertThat(exerciseRepository.findByName("lunges").orElseThrow(IllegalStateException::new).getId()).isEqualTo(1L);
         assertThat(exerciseRepository.findByName("cable rows").orElseThrow(IllegalStateException::new).getId()).isEqualTo(5L);
 
+        // WHEN retrieving all exercises
         mockMvc.perform(get("/fitness/exercises").with(userAuth()))
+                // THEN the response should be successful and return all exercises for that user
                 .andExpect(status().isOk())
                 .andExpect(model().attributeExists("exercises"))
-                .andExpect(model().attribute("exercises", hasSize(10)))
+                .andExpect(model().attribute("exercises", hasSize(6)))
                 .andExpect(model().attribute("exercises", hasItems(
                         allOf(
                                 hasProperty("id", is(1L)),
@@ -58,23 +61,29 @@ class ExerciseControllerIntegrationTest extends FitnessTrackerTest {
 
     @Test
     void shouldSaveExercise() throws Exception {
+        // GIVEN no exercise with the name "dumbbell curls"
+        // WHEN saving a new exercise
         mockMvc.perform(post("/fitness/exercises")
                 .with(userAuth())
                 .contentType(MediaType.APPLICATION_FORM_URLENCODED)
                 .param("name", "dumbbell curls"))
             .andExpect(status().is3xxRedirection());
 
+        // THEN the exercise should be saved
         assertThat(exerciseRepository.findByName("dumbbell curls")).isPresent();
     }
 
     @Test
     void shouldReturnErrorForDuplicateExercise() throws Exception {
+        // GIVEN an exercise exists with the name "lunges"
         assertThat(exerciseRepository.findByName("lunges")).isPresent();
 
+        // WHEN trying to save a duplicate exercise
         mockMvc.perform(post("/fitness/exercises")
                 .with(userAuth())
                 .contentType(MediaType.APPLICATION_FORM_URLENCODED)
                 .param("name", "lunges"))
+            // THEN the response should be a redirect to the exercise list with an error message
             .andExpect(status().isOk())
             .andExpect(model().attribute("errorMessage", notNullValue()));
     }

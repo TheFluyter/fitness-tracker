@@ -4,7 +4,10 @@ import com.thefluyter.fitnesstracker.exception.DuplicateExerciseException;
 import com.thefluyter.fitnesstracker.exception.ExerciseNotFoundException;
 import com.thefluyter.fitnesstracker.model.exercise.Exercise;
 import com.thefluyter.fitnesstracker.model.exercise.ExerciseDto;
+import com.thefluyter.fitnesstracker.model.user.User;
 import com.thefluyter.fitnesstracker.repository.exercise.ExerciseRepository;
+import com.thefluyter.fitnesstracker.repository.exercise.UserExerciseRepository;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.ArgumentCaptor;
@@ -12,6 +15,9 @@ import org.mockito.Captor;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.context.SecurityContext;
+import org.springframework.security.core.context.SecurityContextHolder;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,8 +32,13 @@ import static org.mockito.Mockito.when;
 @ExtendWith(MockitoExtension.class)
 class ExerciseServiceTest {
 
+    private final Long testUserId = 1L;
+
     @Mock
     ExerciseRepository exerciseRepository;
+
+    @Mock
+    UserExerciseRepository userExerciseRepository;
 
     @InjectMocks
     ExerciseService exerciseService;
@@ -35,17 +46,30 @@ class ExerciseServiceTest {
     @Captor
     private ArgumentCaptor<Exercise> exerciseCaptor;
 
+    @BeforeEach
+    void setUp() {
+        User mockUser = new User("testUser", "secret");
+        mockUser.setId(testUserId);
+
+        UsernamePasswordAuthenticationToken auth =
+            new UsernamePasswordAuthenticationToken(mockUser, null);
+
+        SecurityContext context = SecurityContextHolder.createEmptyContext();
+        context.setAuthentication(auth);
+        SecurityContextHolder.setContext(context);
+    }
+
     @Test
     void shouldReturnAllExercises() {
         // GIVEN a list of exercises
         List<Exercise> exercises = createExercises();
-        when(exerciseRepository.findAll()).thenReturn(exercises);
+        when(exerciseRepository.findAllForUser(testUserId)).thenReturn(exercises);
 
         // WHEN getting all exercises
         List<ExerciseDto> exerciseDtos = exerciseService.getAllExercises();
 
         // THEN the exercises are sorted by name
-        verify(exerciseRepository).findAll();
+        verify(exerciseRepository).findAllForUser(testUserId);
         assertEquals(3, exerciseDtos.size());
         assertThat(exerciseDtos.getFirst()).extracting("id", "name").containsExactly(1L, "Bench Press");
         assertThat(exerciseDtos.get(1)).extracting("id", "name").containsExactly(3L, "Deadlift");
@@ -73,6 +97,7 @@ class ExerciseServiceTest {
         // GIVEN an exercise that already exists
         ExerciseDto exerciseDto = new ExerciseDto(1L, "Bench Press");
         when(exerciseRepository.findByName("Bench Press")).thenReturn(Optional.of(new Exercise(1L, "Bench Press")));
+        when(userExerciseRepository.existsByExerciseIdForUser(1L, testUserId)).thenReturn(true);
 
         // WHEN adding a new exercise
         // THEN a DuplicateExerciseException is thrown
@@ -83,13 +108,13 @@ class ExerciseServiceTest {
     void shouldGetExerciseById() {
         // GIVEN an exercise
         Exercise exercise = new Exercise(1L, "Bench Press");
-        when(exerciseRepository.findById(1L)).thenReturn(Optional.of(exercise));
+        when(exerciseRepository.findByIdForUser(1L, testUserId)).thenReturn(Optional.of(exercise));
 
         // WHEN getting an exercise by id
         ExerciseDto exerciseDto = exerciseService.findById(1L);
 
         // THEN the exercise is returned
-        verify(exerciseRepository).findById(1L);
+        verify(exerciseRepository).findByIdForUser(1L, testUserId);
         assertThat(exerciseDto.getId()).isEqualTo(1L);
         assertThat(exerciseDto.getName()).isEqualTo("Bench Press");
     }
@@ -97,7 +122,7 @@ class ExerciseServiceTest {
     @Test
     void shouldThrowExerciseNotFoundException() {
         // GIVEN no exercise
-        when(exerciseRepository.findById(1L)).thenReturn(Optional.empty());
+        when(exerciseRepository.findByIdForUser(1L, testUserId)).thenReturn(Optional.empty());
 
         // WHEN getting an exercise by id
         // THEN an ExerciseNotFoundException is thrown

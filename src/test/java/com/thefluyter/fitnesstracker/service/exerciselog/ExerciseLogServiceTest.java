@@ -4,8 +4,11 @@ import com.thefluyter.fitnesstracker.model.exercise.Exercise;
 import com.thefluyter.fitnesstracker.model.exercise.ExerciseDto;
 import com.thefluyter.fitnesstracker.model.exerciselog.ExerciseLog;
 import com.thefluyter.fitnesstracker.model.exerciselog.ExerciseLogDto;
+import com.thefluyter.fitnesstracker.model.user.User;
+import com.thefluyter.fitnesstracker.repository.exercise.UserExerciseLogRepository;
 import com.thefluyter.fitnesstracker.repository.exerciselog.ExerciseLogRepository;
 import org.assertj.core.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.ArgumentCaptor;
@@ -13,6 +16,9 @@ import org.mockito.Captor;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.context.SecurityContext;
+import org.springframework.security.core.context.SecurityContextHolder;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -24,8 +30,13 @@ import static org.mockito.Mockito.when;
 @ExtendWith(MockitoExtension.class)
 class ExerciseLogServiceTest {
 
+    private final Long testUserId = 1L;
+
     @Mock
     private ExerciseLogRepository exerciseLogRepository;
+
+    @Mock
+    private UserExerciseLogRepository userExerciseLogRepository;
 
     @InjectMocks
     private ExerciseLogService exerciseLogService;
@@ -33,11 +44,24 @@ class ExerciseLogServiceTest {
     @Captor
     private ArgumentCaptor<ExerciseLog> exerciseLogCaptor;
 
+    @BeforeEach
+    void setUp() {
+        User mockUser = new User("testUser", "secret");
+        mockUser.setId(testUserId);
+
+        UsernamePasswordAuthenticationToken auth =
+            new UsernamePasswordAuthenticationToken(mockUser, null);
+
+        SecurityContext context = SecurityContextHolder.createEmptyContext();
+        context.setAuthentication(auth);
+        SecurityContextHolder.setContext(context);
+    }
+
     @Test
-    void shouldReturnAllExerciseLogs() {
+    void shouldReturnAllExerciseLogsForUser() {
         // GIVEN a list of exercise logs
         List<ExerciseLog> exerciseLogs = createExerciseLogs();
-        when(exerciseLogRepository.findAll()).thenReturn(exerciseLogs);
+        when(exerciseLogRepository.findAllForUser(testUserId)).thenReturn(exerciseLogs);
 
         // WHEN getting all exercise logs
         List<ExerciseLogDto> logs = exerciseLogService.findAll();
@@ -56,7 +80,7 @@ class ExerciseLogServiceTest {
     void shouldReturnExerciseLogsByExerciseId() {
         // GIVEN a list of exercise logs
         List<ExerciseLog> exerciseLogs = createExerciseLogsForOneExercise();
-        when(exerciseLogRepository.findByExerciseIdForUser(1L)).thenReturn(exerciseLogs);
+        when(exerciseLogRepository.findByExerciseIdForUser(1L, 1L)).thenReturn(exerciseLogs);
 
         // WHEN getting all exercise logs for one exercise
         List<ExerciseLogDto> logs = exerciseLogService.findLogsByExerciseId(1L);

@@ -42,20 +42,20 @@ class ExerciseLogControllerIntegrationTest extends FitnessTrackerTest {
 
     @Test
     void shouldRetrieveAllExerciseLogs() throws Exception {
-        // GIVEN 10 exercise logs
-        assertThat(exerciseLogRepository.findAll()).hasSize(10);
+        // GIVEN 6 exercise logs for a user
+        assertThat(exerciseLogRepository.findAllForUser(getUserId())).hasSize(6);
         assertThat(exerciseLogRepository.findById(1L)).isPresent();
         assertThat(exerciseLogRepository.findById(5L)).isPresent();
 
         // WHEN retrieving all exercise logs
         mockMvc.perform(get("/fitness/exercise-log").with(userAuth()))
-            // THEN the response should be successful and return all exercise logs
+            // THEN the response should be successful and return all exercise logs for that user
             .andExpect(status().isOk())
             .andExpect(model().attributeExists("exerciseLogs"))
             .andExpect(model().attributeExists("exercises"))
             .andExpect(model().attribute("selectedExerciseId", is((Object) null)))
             .andExpect(model().attribute("selectedExerciseName", is((Object) null)))
-            .andExpect(model().attribute("exerciseLogs", hasSize(10)))
+            .andExpect(model().attribute("exerciseLogs", hasSize(6)))
             .andExpect(model().attribute("exerciseLogs", hasItems(
                 allOf(
                     hasProperty("id", is(1L)),
@@ -82,14 +82,12 @@ class ExerciseLogControllerIntegrationTest extends FitnessTrackerTest {
 
     @Test
     void shouldRetrieveLogsForSpecificExercise() throws Exception {
-        // GIVEN 10 exercise logs
-        assertThat(exerciseLogRepository.findAll()).hasSize(10);
+        // GIVEN 2 exercise logs for lunges
         assertThat(exerciseLogRepository.findById(1L)).isPresent();
-        assertThat(exerciseLogRepository.findById(5L)).isPresent();
 
-        // WHEN retrieving exercise logs for exercise with id 1
+        // WHEN all exercise logs for lunges are retrieved
         mockMvc.perform(get("/fitness/exercise-log?exerciseId=1").with(userAuth()))
-            // THEN the response should be successful and return all exercise logs for exercise with id 1
+            // THEN the response should be successful and return all exercise logs for lunges
             .andExpect(status().isOk())
             .andExpect(model().attributeExists("exerciseLogs"))
             .andExpect(model().attributeExists("exercises"))
@@ -100,8 +98,8 @@ class ExerciseLogControllerIntegrationTest extends FitnessTrackerTest {
 
     @Test
     void shouldAddExerciseLog() throws Exception {
-        // GIVEN two existing logs for lunges
-        assertThat(exerciseLogRepository.findByExerciseIdForUser(1L)).hasSize(2);
+        // GIVEN 2 existing logs for lunges
+        assertThat(exerciseLogRepository.findByExerciseIdForUser(1L, 1L)).hasSize(2);
 
         ExerciseLogDto exerciseLogDto = ExerciseLogDto.builder()
             .date(LocalDate.of(2025, Month.JANUARY, 20))
@@ -124,8 +122,8 @@ class ExerciseLogControllerIntegrationTest extends FitnessTrackerTest {
             .andExpect(redirectedUrl("/fitness/exercise-log"));
 
         // THEN the response should be successful and the new exercise log should be added
-        assertThat(exerciseLogRepository.findByExerciseIdForUser(1L)).hasSize(3);
-        List<ExerciseLog> exerciseLogs = exerciseLogRepository.findByExerciseIdForUser(1L);
+        assertThat(exerciseLogRepository.findByExerciseIdForUser(1L, 1L)).hasSize(3);
+        List<ExerciseLog> exerciseLogs = exerciseLogRepository.findByExerciseIdForUser(1L, 1L);
         assertThat(exerciseLogs)
             .anyMatch(log -> log.getReps1().equals(20))
             .anyMatch(log -> log.getReps2().equals(18))

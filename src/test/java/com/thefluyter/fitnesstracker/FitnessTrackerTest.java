@@ -19,14 +19,25 @@ import org.springframework.transaction.annotation.Transactional;
 @Sql(scripts = {
     "/integrationtest/sql/exercise.sql",
     "/integrationtest/sql/exercise_log.sql",
-    "/integrationtest/sql/user.sql"
+    "/integrationtest/sql/user.sql",
+    "/integrationtest/sql/user_exercises.sql",
+    "/integrationtest/sql/user_exercise_logs.sql"
 })
 public class FitnessTrackerTest {
 
+    private static final String USERNAME = "user";
+    private static final String PASSWORD = "password";
+    private static final Long USER_ID = 1L;
+
     public RequestPostProcessor userAuth() {
         UsernamePasswordAuthenticationToken userAuth;
-        User user = new User("user", "password");
-        userAuth = new UsernamePasswordAuthenticationToken(user, "password", user.getAuthorities());
+        User user = new User(USERNAME, PASSWORD);
+        user.setId(USER_ID);
+        userAuth = new UsernamePasswordAuthenticationToken(user, PASSWORD, user.getAuthorities());
         return SecurityMockMvcRequestPostProcessors.authentication(userAuth);
+    }
+
+    public Long getUserId() {
+        return USER_ID;
     }
 }
