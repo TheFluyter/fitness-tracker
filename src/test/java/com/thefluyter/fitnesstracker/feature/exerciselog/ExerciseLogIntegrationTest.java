@@ -1,7 +1,7 @@
 package com.thefluyter.fitnesstracker.feature.exerciselog;
 
 import com.thefluyter.fitnesstracker.FitnessTrackerTest;
-import com.thefluyter.fitnesstracker.feature.exercise.ExerciseDto;
+import com.thefluyter.fitnesstracker.shared.exercise.ExerciseDto;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;

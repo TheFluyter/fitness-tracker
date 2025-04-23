@@ -1,5 +1,8 @@
 package com.thefluyter.fitnesstracker.feature.exercise;
 
+import com.thefluyter.fitnesstracker.shared.exercise.Exercise;
+import com.thefluyter.fitnesstracker.shared.exercise.ExerciseDto;
+import com.thefluyter.fitnesstracker.shared.exercise.ExerciseMapper;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;

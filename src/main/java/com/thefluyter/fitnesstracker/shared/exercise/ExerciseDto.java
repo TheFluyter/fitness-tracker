@@ -1,4 +1,4 @@
-package com.thefluyter.fitnesstracker.feature.exercise;
+package com.thefluyter.fitnesstracker.shared.exercise;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

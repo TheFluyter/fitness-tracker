@@ -1,6 +1,6 @@
 package com.thefluyter.fitnesstracker.feature.exerciselog;
 
-import com.thefluyter.fitnesstracker.feature.exercise.Exercise;
+import com.thefluyter.fitnesstracker.shared.exercise.Exercise;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;

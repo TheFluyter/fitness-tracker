@@ -1,4 +1,4 @@
-package com.thefluyter.fitnesstracker.feature.exercise;
+package com.thefluyter.fitnesstracker.shared.exercise;
 
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;

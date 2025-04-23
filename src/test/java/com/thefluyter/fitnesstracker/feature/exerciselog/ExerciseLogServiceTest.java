@@ -1,7 +1,7 @@
 package com.thefluyter.fitnesstracker.feature.exerciselog;
 
-import com.thefluyter.fitnesstracker.feature.exercise.Exercise;
-import com.thefluyter.fitnesstracker.feature.exercise.ExerciseDto;
+import com.thefluyter.fitnesstracker.shared.exercise.Exercise;
+import com.thefluyter.fitnesstracker.shared.exercise.ExerciseDto;
 import com.thefluyter.fitnesstracker.feature.user.User;
 import com.thefluyter.fitnesstracker.feature.user.UserExerciseLogRepository;
 import org.assertj.core.api.Assertions;

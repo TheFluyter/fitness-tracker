@@ -1,5 +1,6 @@
 package com.thefluyter.fitnesstracker.feature.exercise;
 
+import com.thefluyter.fitnesstracker.shared.exercise.Exercise;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -9,7 +10,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public interface ExerciseRepository extends JpaRepository<Exercise, Long> {
+interface ExerciseRepository extends JpaRepository<Exercise, Long> {
     Optional<Exercise> findByName(String name);
 
     @Query("SELECT e FROM Exercise e JOIN UserExercise ue ON e.id = ue.exercise.id WHERE ue.user.id = :userId")

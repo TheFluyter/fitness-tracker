@@ -1,7 +1,7 @@
 package com.thefluyter.fitnesstracker.feature.exerciselog;
 
-import com.thefluyter.fitnesstracker.feature.exercise.ExerciseDto;
-import com.thefluyter.fitnesstracker.feature.exercise.ExerciseService;
+import com.thefluyter.fitnesstracker.shared.exercise.ExerciseDto;
+import com.thefluyter.fitnesstracker.shared.exercise.ExerciseService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;

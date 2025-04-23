@@ -1,6 +1,6 @@
 package com.thefluyter.fitnesstracker.feature.exerciselog;
 
-import com.thefluyter.fitnesstracker.feature.exercise.ExerciseDto;
+import com.thefluyter.fitnesstracker.shared.exercise.ExerciseDto;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
