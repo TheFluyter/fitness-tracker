@@ -1,6 +1,6 @@
 package com.thefluyter.fitnesstracker;
 
-import com.thefluyter.fitnesstracker.user.User;
+import com.thefluyter.fitnesstracker.feature.user.User;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
