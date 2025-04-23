@@ -1,9 +1,10 @@
 package com.thefluyter.fitnesstracker.service.exerciselog;
 
-import com.thefluyter.fitnesstracker.model.exercise.Exercise;
-import com.thefluyter.fitnesstracker.model.exercise.ExerciseDto;
-import com.thefluyter.fitnesstracker.model.exerciselog.ExerciseLog;
-import com.thefluyter.fitnesstracker.model.exerciselog.ExerciseLogDto;
+import com.thefluyter.fitnesstracker.exercise.Exercise;
+import com.thefluyter.fitnesstracker.exercise.ExerciseDto;
+import com.thefluyter.fitnesstracker.exerciselog.ExerciseLog;
+import com.thefluyter.fitnesstracker.exerciselog.ExerciseLogDto;
+import com.thefluyter.fitnesstracker.exerciselog.ExerciseLogMapper;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;

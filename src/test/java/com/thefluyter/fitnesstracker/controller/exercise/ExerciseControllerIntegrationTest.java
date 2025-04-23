@@ -1,7 +1,8 @@
 package com.thefluyter.fitnesstracker.controller.exercise;
 
 import com.thefluyter.fitnesstracker.FitnessTrackerTest;
-import com.thefluyter.fitnesstracker.repository.exercise.ExerciseRepository;
+import com.thefluyter.fitnesstracker.exercise.ExerciseController;
+import com.thefluyter.fitnesstracker.exercise.ExerciseRepository;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;

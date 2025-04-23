@@ -1,10 +1,11 @@
 package com.thefluyter.fitnesstracker.controller.exerciselog;
 
 import com.thefluyter.fitnesstracker.FitnessTrackerTest;
-import com.thefluyter.fitnesstracker.model.exercise.ExerciseDto;
-import com.thefluyter.fitnesstracker.model.exerciselog.ExerciseLog;
-import com.thefluyter.fitnesstracker.model.exerciselog.ExerciseLogDto;
-import com.thefluyter.fitnesstracker.repository.exerciselog.ExerciseLogRepository;
+import com.thefluyter.fitnesstracker.exercise.ExerciseDto;
+import com.thefluyter.fitnesstracker.exerciselog.ExerciseLog;
+import com.thefluyter.fitnesstracker.exerciselog.ExerciseLogController;
+import com.thefluyter.fitnesstracker.exerciselog.ExerciseLogDto;
+import com.thefluyter.fitnesstracker.exerciselog.ExerciseLogRepository;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
