@@ -1,13 +1,7 @@
-package com.thefluyter.fitnesstracker.service.exercise;
+package com.thefluyter.fitnesstracker.exercise;
 
-import com.thefluyter.fitnesstracker.exercise.DuplicateExerciseException;
-import com.thefluyter.fitnesstracker.exercise.ExerciseNotFoundException;
-import com.thefluyter.fitnesstracker.exercise.Exercise;
-import com.thefluyter.fitnesstracker.exercise.ExerciseDto;
-import com.thefluyter.fitnesstracker.exercise.ExerciseService;
 import com.thefluyter.fitnesstracker.user.User;
-import com.thefluyter.fitnesstracker.exercise.ExerciseRepository;
-import com.thefluyter.fitnesstracker.exercise.UserExerciseRepository;
+import com.thefluyter.fitnesstracker.user.UserExerciseRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

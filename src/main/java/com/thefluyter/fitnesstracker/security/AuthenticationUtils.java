@@ -1,11 +1,12 @@
-package com.thefluyter.fitnesstracker.user;
+package com.thefluyter.fitnesstracker.security;
 
+import com.thefluyter.fitnesstracker.user.User;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 
-public class UserAuthenticationUtils {
+public class AuthenticationUtils {
 
-    private UserAuthenticationUtils() {
+    private AuthenticationUtils() {
     }
 
     public static Long getCurrentUserId() {

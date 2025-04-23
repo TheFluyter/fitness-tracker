@@ -1,13 +1,9 @@
-package com.thefluyter.fitnesstracker.service.exerciselog;
+package com.thefluyter.fitnesstracker.exerciselog;
 
 import com.thefluyter.fitnesstracker.exercise.Exercise;
 import com.thefluyter.fitnesstracker.exercise.ExerciseDto;
-import com.thefluyter.fitnesstracker.exerciselog.ExerciseLog;
-import com.thefluyter.fitnesstracker.exerciselog.ExerciseLogDto;
-import com.thefluyter.fitnesstracker.exerciselog.ExerciseLogService;
 import com.thefluyter.fitnesstracker.user.User;
 import com.thefluyter.fitnesstracker.user.UserExerciseLogRepository;
-import com.thefluyter.fitnesstracker.exerciselog.ExerciseLogRepository;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

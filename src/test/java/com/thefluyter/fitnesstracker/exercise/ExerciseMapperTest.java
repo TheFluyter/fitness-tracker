@@ -1,8 +1,5 @@
-package com.thefluyter.fitnesstracker.service.exercise;
+package com.thefluyter.fitnesstracker.exercise;
 
-import com.thefluyter.fitnesstracker.exercise.Exercise;
-import com.thefluyter.fitnesstracker.exercise.ExerciseDto;
-import com.thefluyter.fitnesstracker.exercise.ExerciseMapper;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;

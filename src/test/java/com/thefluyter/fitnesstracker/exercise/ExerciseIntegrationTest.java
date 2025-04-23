@@ -1,8 +1,6 @@
-package com.thefluyter.fitnesstracker.controller.exercise;
+package com.thefluyter.fitnesstracker.exercise;
 
 import com.thefluyter.fitnesstracker.FitnessTrackerTest;
-import com.thefluyter.fitnesstracker.exercise.ExerciseController;
-import com.thefluyter.fitnesstracker.exercise.ExerciseRepository;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,7 +25,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @AutoConfigureMockMvc
 @ExtendWith(SpringExtension.class)
 @SpringBootTest(classes = {ExerciseController.class})
-class ExerciseControllerIntegrationTest extends FitnessTrackerTest {
+class ExerciseIntegrationTest extends FitnessTrackerTest {
 
     @Autowired
     MockMvc mockMvc;

@@ -1,11 +1,7 @@
-package com.thefluyter.fitnesstracker.controller.exerciselog;
+package com.thefluyter.fitnesstracker.exerciselog;
 
 import com.thefluyter.fitnesstracker.FitnessTrackerTest;
 import com.thefluyter.fitnesstracker.exercise.ExerciseDto;
-import com.thefluyter.fitnesstracker.exerciselog.ExerciseLog;
-import com.thefluyter.fitnesstracker.exerciselog.ExerciseLogController;
-import com.thefluyter.fitnesstracker.exerciselog.ExerciseLogDto;
-import com.thefluyter.fitnesstracker.exerciselog.ExerciseLogRepository;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,7 +29,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @AutoConfigureMockMvc
 @ExtendWith(SpringExtension.class)
 @SpringBootTest(classes = {ExerciseLogController.class})
-class ExerciseLogControllerIntegrationTest extends FitnessTrackerTest {
+class ExerciseLogIntegrationTest extends FitnessTrackerTest {
 
     @Autowired
     MockMvc mockMvc;

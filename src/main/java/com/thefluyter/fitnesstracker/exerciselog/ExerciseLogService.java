@@ -2,6 +2,7 @@ package com.thefluyter.fitnesstracker.exerciselog;
 
 import com.thefluyter.fitnesstracker.exercise.Exercise;
 import com.thefluyter.fitnesstracker.exercise.ExerciseDto;
+import com.thefluyter.fitnesstracker.user.UserExerciseLog;
 import com.thefluyter.fitnesstracker.user.UserExerciseLogRepository;
 import com.thefluyter.fitnesstracker.exercise.ExerciseMapper;
 import lombok.RequiredArgsConstructor;
@@ -10,8 +11,8 @@ import org.springframework.stereotype.Component;
 
 import java.util.List;
 
-import static com.thefluyter.fitnesstracker.user.UserAuthenticationUtils.getCurrentUser;
-import static com.thefluyter.fitnesstracker.user.UserAuthenticationUtils.getCurrentUserId;
+import static com.thefluyter.fitnesstracker.security.AuthenticationUtils.getCurrentUser;
+import static com.thefluyter.fitnesstracker.security.AuthenticationUtils.getCurrentUserId;
 
 @Component
 @RequiredArgsConstructor
@@ -36,6 +37,6 @@ public class ExerciseLogService {
 
         ExerciseLog saved = exerciseLogRepository.save(exerciseLog);
         userExerciseLogRepository.save(new UserExerciseLog(getCurrentUser(), saved));
-        log.info("Saved exercise {}", saved);
+        log.info("Saved exercise log: {}", saved);
     }
 }

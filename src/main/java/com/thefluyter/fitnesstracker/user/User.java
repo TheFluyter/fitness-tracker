@@ -33,7 +33,7 @@ public class User implements UserDetails {
     }
 
     public String getDisplayName() {
-        return username.length() > 2 ? username.substring(0, 2).toUpperCase() : "AA";
+        return username.length() > 1 ? username.substring(0, 2).toUpperCase() : "AA";
     }
 
     @Override

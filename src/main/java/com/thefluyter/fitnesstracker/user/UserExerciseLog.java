@@ -1,6 +1,6 @@
-package com.thefluyter.fitnesstracker.exerciselog;
+package com.thefluyter.fitnesstracker.user;
 
-import com.thefluyter.fitnesstracker.user.User;
+import com.thefluyter.fitnesstracker.exerciselog.ExerciseLog;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.IdClass;

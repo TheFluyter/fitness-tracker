@@ -1,5 +1,7 @@
 package com.thefluyter.fitnesstracker.exercise;
 
+import com.thefluyter.fitnesstracker.user.UserExercise;
+import com.thefluyter.fitnesstracker.user.UserExerciseRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
@@ -9,8 +11,8 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 
-import static com.thefluyter.fitnesstracker.user.UserAuthenticationUtils.getCurrentUser;
-import static com.thefluyter.fitnesstracker.user.UserAuthenticationUtils.getCurrentUserId;
+import static com.thefluyter.fitnesstracker.security.AuthenticationUtils.getCurrentUser;
+import static com.thefluyter.fitnesstracker.security.AuthenticationUtils.getCurrentUserId;
 
 @Component
 @Slf4j
