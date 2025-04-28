@@ -1,7 +1,7 @@
 package com.thefluyter.fitnesstracker.web;
 
-import com.thefluyter.fitnesstracker.feature.user.User;
-import com.thefluyter.fitnesstracker.feature.user.UserRepository;
+import com.thefluyter.fitnesstracker.shared.user.User;
+import com.thefluyter.fitnesstracker.shared.user.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;

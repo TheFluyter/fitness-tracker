@@ -2,8 +2,8 @@ package com.thefluyter.fitnesstracker.feature.exercise;
 
 import com.thefluyter.fitnesstracker.feature.exercise.exception.DuplicateExerciseException;
 import com.thefluyter.fitnesstracker.feature.exercise.exception.ExerciseNotFoundException;
-import com.thefluyter.fitnesstracker.feature.user.User;
-import com.thefluyter.fitnesstracker.feature.user.UserExerciseRepository;
+import com.thefluyter.fitnesstracker.shared.user.User;
+import com.thefluyter.fitnesstracker.shared.user.UserExerciseRepository;
 import com.thefluyter.fitnesstracker.shared.exercise.Exercise;
 import com.thefluyter.fitnesstracker.shared.exercise.ExerciseDto;
 import org.junit.jupiter.api.BeforeEach;
@@ -29,7 +29,7 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
-class ExerciseServiceImplTest {
+class ExerciseServiceTest {
 
     private final Long testUserId = 1L;
 
@@ -40,7 +40,7 @@ class ExerciseServiceImplTest {
     UserExerciseRepository userExerciseRepository;
 
     @InjectMocks
-    ExerciseServiceImpl exerciseServiceImpl;
+    ExerciseServiceImpl exerciseService;
 
     @Captor
     private ArgumentCaptor<Exercise> exerciseCaptor;
@@ -65,7 +65,7 @@ class ExerciseServiceImplTest {
         when(exerciseRepository.findAllForUser(testUserId)).thenReturn(exercises);
 
         // WHEN getting all exercises
-        List<ExerciseDto> exerciseDtos = exerciseServiceImpl.getAllExercises();
+        List<ExerciseDto> exerciseDtos = exerciseService.getAllExercises();
 
         // THEN the exercises are sorted by name
         verify(exerciseRepository).findAllForUser(testUserId);
@@ -82,7 +82,7 @@ class ExerciseServiceImplTest {
         when(exerciseRepository.findByName("Bench Press")).thenReturn(Optional.empty());
 
         // WHEN adding a new exercise
-        exerciseServiceImpl.addNewExercise(exerciseDto);
+        exerciseService.addNewExercise(exerciseDto);
 
         // THEN the exercise is saved
         verify(exerciseRepository).save(exerciseCaptor.capture());
@@ -100,7 +100,7 @@ class ExerciseServiceImplTest {
 
         // WHEN adding a new exercise
         // THEN a DuplicateExerciseException is thrown
-        assertThrows(DuplicateExerciseException.class, () -> exerciseServiceImpl.addNewExercise(exerciseDto));
+        assertThrows(DuplicateExerciseException.class, () -> exerciseService.addNewExercise(exerciseDto));
     }
 
     @Test
@@ -110,7 +110,7 @@ class ExerciseServiceImplTest {
         when(exerciseRepository.findByIdForUser(1L, testUserId)).thenReturn(Optional.of(exercise));
 
         // WHEN getting an exercise by id
-        ExerciseDto exerciseDto = exerciseServiceImpl.findById(1L);
+        ExerciseDto exerciseDto = exerciseService.findById(1L);
 
         // THEN the exercise is returned
         verify(exerciseRepository).findByIdForUser(1L, testUserId);
@@ -125,7 +125,7 @@ class ExerciseServiceImplTest {
 
         // WHEN getting an exercise by id
         // THEN an ExerciseNotFoundException is thrown
-        assertThrows(ExerciseNotFoundException.class, () -> exerciseServiceImpl.findById(1L));
+        assertThrows(ExerciseNotFoundException.class, () -> exerciseService.findById(1L));
     }
 
     private List<Exercise> createExercises() {

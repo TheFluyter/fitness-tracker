@@ -1,4 +1,4 @@
-package com.thefluyter.fitnesstracker.feature.exerciselog;
+package com.thefluyter.fitnesstracker.shared.exerciselog;
 
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;

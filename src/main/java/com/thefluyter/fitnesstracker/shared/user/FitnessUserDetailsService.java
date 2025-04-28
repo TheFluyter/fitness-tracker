@@ -1,4 +1,4 @@
-package com.thefluyter.fitnesstracker.feature.user;
+package com.thefluyter.fitnesstracker.shared.user;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;

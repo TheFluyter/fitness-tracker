@@ -1,23 +1,27 @@
 package com.thefluyter.fitnesstracker.feature.exerciselog;
 
+import com.thefluyter.fitnesstracker.shared.user.UserExerciseLog;
+import com.thefluyter.fitnesstracker.shared.user.UserExerciseLogRepository;
 import com.thefluyter.fitnesstracker.shared.exercise.Exercise;
 import com.thefluyter.fitnesstracker.shared.exercise.ExerciseDto;
-import com.thefluyter.fitnesstracker.feature.user.UserExerciseLog;
-import com.thefluyter.fitnesstracker.feature.user.UserExerciseLogRepository;
 import com.thefluyter.fitnesstracker.shared.exercise.ExerciseMapper;
+import com.thefluyter.fitnesstracker.shared.exerciselog.ExerciseLog;
+import com.thefluyter.fitnesstracker.shared.exerciselog.ExerciseLogDto;
+import com.thefluyter.fitnesstracker.shared.exerciselog.ExerciseLogMapper;
+import com.thefluyter.fitnesstracker.shared.exerciselog.ExerciseLogService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 import static com.thefluyter.fitnesstracker.security.AuthenticationUtils.getCurrentUser;
 import static com.thefluyter.fitnesstracker.security.AuthenticationUtils.getCurrentUserId;
 
-@Component
+@Service
 @RequiredArgsConstructor
 @Slf4j
-public class ExerciseLogService {
+class ExerciseLogServiceImpl implements ExerciseLogService {
 
     private final ExerciseLogRepository exerciseLogRepository;
     private final UserExerciseLogRepository userExerciseLogRepository;

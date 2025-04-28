@@ -15,21 +15,21 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequiredArgsConstructor
 class ExerciseController {
 
-    private final ExerciseServiceImpl exerciseServiceImpl;
+    private final ExerciseServiceImpl exerciseService;
 
     @GetMapping("/exercises")
     public String getAllExercises(Model model) {
-        model.addAttribute("exercises", exerciseServiceImpl.getAllExercises());
+        model.addAttribute("exercises", exerciseService.getAllExercises());
         return "exercises";
     }
 
     @PostMapping("/exercises")
     public String addExercise(@ModelAttribute ExerciseDto exerciseDto, Model model) {
         try {
-            exerciseServiceImpl.addNewExercise(exerciseDto);
+            exerciseService.addNewExercise(exerciseDto);
         } catch (DuplicateExerciseException e) {
             model.addAttribute("errorMessage", e.getMessage());
-            model.addAttribute("exercises", exerciseServiceImpl.getAllExercises());
+            model.addAttribute("exercises", exerciseService.getAllExercises());
             return "exercises";
         }
         return "redirect:/fitness/exercises";

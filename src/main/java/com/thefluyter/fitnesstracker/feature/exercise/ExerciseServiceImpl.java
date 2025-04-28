@@ -2,12 +2,12 @@ package com.thefluyter.fitnesstracker.feature.exercise;
 
 import com.thefluyter.fitnesstracker.feature.exercise.exception.DuplicateExerciseException;
 import com.thefluyter.fitnesstracker.feature.exercise.exception.ExerciseNotFoundException;
-import com.thefluyter.fitnesstracker.feature.user.UserExercise;
-import com.thefluyter.fitnesstracker.feature.user.UserExerciseRepository;
+import com.thefluyter.fitnesstracker.shared.exercise.ExerciseService;
+import com.thefluyter.fitnesstracker.shared.user.UserExercise;
+import com.thefluyter.fitnesstracker.shared.user.UserExerciseRepository;
 import com.thefluyter.fitnesstracker.shared.exercise.Exercise;
 import com.thefluyter.fitnesstracker.shared.exercise.ExerciseDto;
 import com.thefluyter.fitnesstracker.shared.exercise.ExerciseMapper;
-import com.thefluyter.fitnesstracker.shared.exercise.ExerciseService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;

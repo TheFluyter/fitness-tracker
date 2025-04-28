@@ -2,6 +2,8 @@ package com.thefluyter.fitnesstracker.feature.exerciselog;
 
 import com.thefluyter.fitnesstracker.shared.exercise.ExerciseDto;
 import com.thefluyter.fitnesstracker.shared.exercise.ExerciseService;
+import com.thefluyter.fitnesstracker.shared.exerciselog.ExerciseLogDto;
+import com.thefluyter.fitnesstracker.shared.exerciselog.ExerciseLogService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
@@ -14,7 +16,7 @@ import java.util.List;
 @RequestMapping("fitness")
 @RequiredArgsConstructor
 @Slf4j
-public class ExerciseLogController {
+class ExerciseLogController {
 
     private final ExerciseLogService exerciseLogService;
     private final ExerciseService exerciseService;

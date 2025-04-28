@@ -1,6 +1,6 @@
 package com.thefluyter.fitnesstracker.security;
 
-import com.thefluyter.fitnesstracker.feature.user.FitnessUserDetailsService;
+import com.thefluyter.fitnesstracker.shared.user.FitnessUserDetailsService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

@@ -1,4 +1,4 @@
-package com.thefluyter.fitnesstracker.feature.exerciseroutine;
+package com.thefluyter.fitnesstracker.shared.exerciseroutine;
 
 import jakarta.persistence.*;
 import lombok.Getter;

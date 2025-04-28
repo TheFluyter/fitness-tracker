@@ -2,6 +2,9 @@ package com.thefluyter.fitnesstracker.feature.exerciselog;
 
 import com.thefluyter.fitnesstracker.shared.exercise.Exercise;
 import com.thefluyter.fitnesstracker.shared.exercise.ExerciseDto;
+import com.thefluyter.fitnesstracker.shared.exerciselog.ExerciseLog;
+import com.thefluyter.fitnesstracker.shared.exerciselog.ExerciseLogDto;
+import com.thefluyter.fitnesstracker.shared.exerciselog.ExerciseLogMapper;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;

@@ -1,4 +1,4 @@
-package com.thefluyter.fitnesstracker.feature.exerciselog;
+package com.thefluyter.fitnesstracker.shared.exerciselog;
 
 import com.thefluyter.fitnesstracker.shared.exercise.Exercise;
 import jakarta.persistence.*;

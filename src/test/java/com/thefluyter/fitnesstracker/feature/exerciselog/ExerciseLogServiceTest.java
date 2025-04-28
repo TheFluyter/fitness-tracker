@@ -2,8 +2,10 @@ package com.thefluyter.fitnesstracker.feature.exerciselog;
 
 import com.thefluyter.fitnesstracker.shared.exercise.Exercise;
 import com.thefluyter.fitnesstracker.shared.exercise.ExerciseDto;
-import com.thefluyter.fitnesstracker.feature.user.User;
-import com.thefluyter.fitnesstracker.feature.user.UserExerciseLogRepository;
+import com.thefluyter.fitnesstracker.shared.user.User;
+import com.thefluyter.fitnesstracker.shared.user.UserExerciseLogRepository;
+import com.thefluyter.fitnesstracker.shared.exerciselog.ExerciseLog;
+import com.thefluyter.fitnesstracker.shared.exerciselog.ExerciseLogDto;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -36,7 +38,7 @@ class ExerciseLogServiceTest {
     private UserExerciseLogRepository userExerciseLogRepository;
 
     @InjectMocks
-    private ExerciseLogService exerciseLogService;
+    private ExerciseLogServiceImpl exerciseLogService;
 
     @Captor
     private ArgumentCaptor<ExerciseLog> exerciseLogCaptor;

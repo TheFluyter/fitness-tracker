@@ -1,5 +1,4 @@
 ### TODO
-- expand exercise logs
 - fix security issues
   - csrf issues
   - configure authorization
@@ -7,4 +6,5 @@
 - add notification when wrong credentials
 
 ## Features
+- exercise routines (expand exercise with muscle group details)
 - food tracker

@@ -1,4 +1,4 @@
-package com.thefluyter.fitnesstracker.feature.user;
+package com.thefluyter.fitnesstracker.shared.user;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;

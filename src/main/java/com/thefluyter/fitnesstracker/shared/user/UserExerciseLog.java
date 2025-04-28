@@ -1,6 +1,6 @@
-package com.thefluyter.fitnesstracker.feature.user;
+package com.thefluyter.fitnesstracker.shared.user;
 
-import com.thefluyter.fitnesstracker.feature.exerciselog.ExerciseLog;
+import com.thefluyter.fitnesstracker.shared.exerciselog.ExerciseLog;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.IdClass;

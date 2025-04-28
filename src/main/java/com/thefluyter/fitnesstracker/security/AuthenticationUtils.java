@@ -1,6 +1,6 @@
 package com.thefluyter.fitnesstracker.security;
 
-import com.thefluyter.fitnesstracker.feature.user.User;
+import com.thefluyter.fitnesstracker.shared.user.User;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 
