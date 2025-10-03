@@ -1,3 +1,6 @@
+create sequence exercise_id_seq;
+create sequence exercise_routine_id_seq;
+
 create table exercise
 (
     id            bigint default nextval('exercise_id_seq'::regclass) not null
